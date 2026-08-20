@@ -1,0 +1,10 @@
+- Do not add NuGet packages without explicit approval.
+- Do not change public contracts without explicit approval.
+- Domain projects may not depend on infrastructure frameworks.
+- Modules may not reference another module's Domain or Infrastructure.
+- Prefer explicit domain behavior over anemic setters.
+- Do not create generic repositories.
+- Do not bypass tenant or authorization abstractions.
+- Every behavioral change requires tests.
+- Do not suppress analyzer warnings to make a build pass.
+- Do not alter architecture tests without explaining why.
