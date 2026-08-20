@@ -37,4 +37,6 @@ binding text until that's revisited.
 ## Contributing
 
 Not open to outside contributions yet — this is solo, dogfood-stage work.
-Contribution guidelines will be added if/when that changes.
+The development workflow and architectural expectations are documented in
+[`CONTRIBUTING.md`](CONTRIBUTING.md) for the project's current maintainers and
+future contributors.

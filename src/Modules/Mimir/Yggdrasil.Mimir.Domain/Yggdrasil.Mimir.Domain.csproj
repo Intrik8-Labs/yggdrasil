@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="../../../Core/Yggdrasil.Core.Domain/Yggdrasil.Core.Domain.csproj" />
+    <ProjectReference Include="../../../Core/Yggdrasil.SharedKernel/Yggdrasil.SharedKernel.csproj" />
   </ItemGroup>
 </Project>

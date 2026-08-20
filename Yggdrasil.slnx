@@ -4,6 +4,7 @@
     <Project Path="src/Core/Yggdrasil.Core.Application/Yggdrasil.Core.Application.csproj" />
     <Project Path="src/Core/Yggdrasil.Core.Domain/Yggdrasil.Core.Domain.csproj" />
     <Project Path="src/Core/Yggdrasil.Core.Infrastructure/Yggdrasil.Core.Infrastructure.csproj" />
+    <Project Path="src/Core/Yggdrasil.SharedKernel/Yggdrasil.SharedKernel.csproj" />
   </Folder>
   <Folder Name="/src/Host/">
     <Project Path="src/Host/Yggdrasil.Api/Yggdrasil.Api.csproj" />
