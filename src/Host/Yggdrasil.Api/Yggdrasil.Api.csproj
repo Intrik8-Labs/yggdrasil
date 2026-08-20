@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="../../Core/Yggdrasil.Core.Infrastructure/Yggdrasil.Core.Infrastructure.csproj" />
+    <ProjectReference Include="../../Modules/Mimir/Yggdrasil.Mimir.Infrastructure/Yggdrasil.Mimir.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

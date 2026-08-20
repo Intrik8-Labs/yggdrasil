@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../../../Core/Yggdrasil.Core.Application/Yggdrasil.Core.Application.csproj" />
+    <ProjectReference Include="../Yggdrasil.Mimir.Domain/Yggdrasil.Mimir.Domain.csproj" />
+  </ItemGroup>
+</Project>
