@@ -1,75 +1,135 @@
 # Yggdrasil — Module Catalog
 
-The original plan defined 23 Norse-named modules for a full
-MSP/PSA/RMM/CRM/ERP platform. This restart keeps the catalog as
-reference and keeps the naming, but only a small slice is actually in
-scope right now (`docs/planning/CHARTER.md`,
-`docs/planning/ROADMAP.md`). Everything else is deferred and will be
-re-justified individually, against real usage evidence, when it's
-actually reached — not pre-committed as a batch (see
-`docs/decisions/adr-0005-deferred-decisions-log.md`).
+Yggdrasil uses Norse-named modules as explicit bounded contexts inside a modular monolith. The catalog describes long-term domain ownership; it is not a commitment to build every module immediately.
 
-## In Scope — Phase 1 MVP
+## Initial Development Scope
 
-**Smidr — Agent**
-Runs on the author's own machines, connects outbound only (never
-listens), and reports basic health/inventory. No per-agent certificate
-identity yet — see `docs/decisions/adr-0003-outbound-only-agent-comms.md`.
-Scaled down from the original orchestration-layer vision (enrollment,
-boot triggers, build coordination) to just: connect, report, receive
-simple commands.
+### Týr
+Authentication, identity, memberships, and access control.
 
-**Heimdallr — Monitoring**
-Receives what Smidr reports and displays fleet/machine health at a
-glance. Scaled down from the original (time-series storage, anomaly
-feeds to Völva, SLO management) to: collect, store, display.
+Initial responsibilities:
 
-**Mimir — Tasks/Tickets**
-Tracks the author's own tasks and projects, linked to the machine(s) they
-relate to. Scaled down from the original (full epics/sprints, commit/PR
-linking, CI/CD timeline integration) to: create, track, and link tasks
-to machines.
+- user identity
+- authentication
+- organization membership
+- roles/permissions foundation
+- active tenant context
 
-**Tyr — Minimal Auth**
-Single-user login only, just enough to gate access to the instance. This
-is not the identity module from the original catalog (no OIDC
-federation, no per-permission JWT claims, no certificate issuance for
-agents) — those are deferred along with multi-tenancy and agent identity.
+### Valhalla
+Administration and tenant management.
 
-## Future Catalog (Reference Only — Not In Scope)
+Initial responsibilities:
 
-Kept here as the re-justification checklist for Phase 3
-(`docs/planning/ROADMAP.md`). One-line summaries carried forward from
-the original plan; each needs to be re-justified against real evidence
-before being picked up, not assumed.
+- organization creation
+- tenant administration
+- organization switching
+- tenant-level settings
 
-| Module | Original purpose |
+### Mímir
+Work management.
+
+Long-term responsibilities include tasks, tickets, projects, epics, sprints, incidents, requests, and related workflows.
+
+Initial responsibilities:
+
+- projects
+- tasks
+- assignment
+- status/workflow basics
+- comments/notes needed for work tracking
+- time tracking
+
+### Urd
+Audit trail and compliance logging.
+
+Initial responsibilities:
+
+- audit significant changes in Týr, Valhalla, and Mímir
+- preserve actor, tenant, time, action, and affected resource context
+- establish an append-oriented audit model
+
+## Extended Module Catalog
+
+| Module | Responsibility |
 | --- | --- |
-| Valhalla | Tenant/admin management — moot until there's more than one tenant |
-| Urd | Immutable audit trail and compliance logging |
-| Gjallarhorn | SLA enforcement and escalation on top of Mimir's work items |
-| Bragi | Internal notes and contextual team communication |
-| Saga | Scheduling/calendar coordination for technician availability |
-| Odin | Internal/external knowledge base and runbooks |
-| Ymir | CI/CD visibility, build/release tracking |
-| Eir | Remote diagnostics and remediation via Smidr |
-| Ran | Backup job monitoring (not performing backups itself) |
-| Vedfolnir | CVE/security posture tracking, patch compliance |
-| Volva | ML-based predictive intelligence on top of Heimdallr telemetry |
-| Skald | Reporting/analytics across platform data; doc validation tooling |
-| Freyja | Hardware/software asset lifecycle registry |
-| Forseti | Contracts, billing, renewal workflows |
-| Sigrun | Automated client onboarding/provisioning |
-| Verdandi | Notification delivery fabric (email, webhook, push) |
-| Hermod | External integrations and API gateway |
-| Loki | Automation/workflow builder across modules |
-| Bifrost | Customer-facing self-service portal |
+| **Týr** | Authentication, identity, membership, and access control |
+| **Mímir** | Work, tickets, tasks, projects, epics, sprints, incidents, and time tracking |
+| **Valhalla** | Administration and tenant management |
+| **Bifröst** | Customer-facing portal |
+| **Gjallarhorn** | SLAs, escalation, and issue/service-management policy |
+| **Verdandi** | Notifications and real-time alerts |
+| **Heimdallr** | Fleet monitoring and health |
+| **Urd** | Audit trail and compliance logging |
+| **Eir** | Remote diagnostics and remediation |
+| **Smidr** | Edge computing and agent orchestration |
+| **Freyja** | Asset lifecycle management |
+| **Loki** | Automation and cross-module workflow engine |
+| **Hermod** | Integrations and API gateway capabilities |
+| **Forseti** | Contracts, service tracking, and later billing/invoicing |
+| **Odin** | Knowledge base and document management |
+| **Rán** | Backup and recovery monitoring |
+| **Bragi** | Communications and contextual notes |
+| **Saga** | Scheduling and calendar |
+| **Veðrfölnir** | Vulnerability and security posture |
+| **Skald** | Reporting and analytics |
+| **Sigrun** | Onboarding and provisioning |
+| **Völva** | Predictive and ML-assisted intelligence |
+| **Ymir** | Build, deployment, and release management |
 
-## Related
+## Ownership Rules
 
-- `docs/planning/CHARTER.md`
-- `docs/planning/ROADMAP.md`
-- `docs/decisions/adr-0002-mvp-single-tenant-scope.md`
-- `docs/decisions/adr-0003-outbound-only-agent-comms.md`
-- `docs/decisions/adr-0004-modular-boundaries-event-driven-comms.md`
-- `docs/decisions/adr-0005-deferred-decisions-log.md`
+A module owns its business model. Other modules do not reach into its implementation projects.
+
+Examples:
+
+- Týr owns identity and membership; Mímir references identity through stable contracts/identifiers rather than Týr internals.
+- Mímir owns work and source time entries; Forseti may later consume billable-time contracts for billing logic.
+- Mímir owns work-item lifecycle; Loki owns broader cross-module automation.
+- Freyja owns assets; Mímir may link work to assets through contracts/identifiers.
+- Urd owns audit persistence; other modules emit auditable events/contracts.
+
+See `docs/architecture/dependency-rules.md` for the binding dependency rules.
+
+## Mímir Design Direction
+
+Mímir should combine:
+
+- Linear-like interaction speed
+- Jira-like flexibility where it provides real value
+- ServiceNow-like maturity around service-management concepts
+
+The goal is not to clone any of those products. Common operations should remain fast while advanced configuration stays available without dominating everyday use.
+
+Potential work types include:
+
+- Task
+- Ticket
+- Incident
+- Request
+- Problem
+- Story
+- Epic
+
+Projects remain a separate concept rather than inheriting from WorkItem.
+
+## Time Tracking
+
+Time tracking initially belongs to Mímir because time is recorded against work.
+
+A time entry is expected to include concepts such as:
+
+- tenant
+- user
+- work item
+- start/end or duration
+- description
+- billable/non-billable classification
+- source
+
+Forseti may later consume time-entry contracts for billing; Skald may consume them for reporting.
+
+## Extensibility
+
+Future plugins and extensions integrate through versioned public contracts rather than implementation assemblies.
+
+Protocol Buffers are expected for long-lived language-neutral plugin, extension, and agent contracts where appropriate.
