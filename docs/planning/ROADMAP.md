@@ -1,71 +1,131 @@
 # Yggdrasil — Roadmap
 
-This roadmap assumes solo work at roughly 5-10 hours/week. Phases are
-sequential by design — each one is meant to produce evidence that justifies
-moving to the next, rather than scope being committed up front.
+Yggdrasil is developed incrementally with lightweight weekly iterations. The roadmap defines direction and exit conditions rather than fixed delivery dates.
 
-## Phase 0 — Planning (current)
+## Phase 0 — Architecture Foundation (current)
 
-- Restate vision and problem statement around actual lived experience
-  (`docs/planning/CHARTER.md`)
-- Re-scope the module catalog down to an MVP slice (`docs/modules/MODULES.md`)
-- Record the architecture concepts being carried forward, and which ones
-  are explicitly deferred (`docs/decisions/`)
+Establish the long-lived project foundation before feature expansion.
 
-**Exit condition:** A scoped MVP definition exists that fits in the
-3-month / 5-10 hr-per-week budget.
+- confirm .NET 10 / ASP.NET Core as the primary platform
+- adopt modular monolith + Clean Architecture
+- define strict module dependency rules
+- establish `SharedKernel` boundaries
+- establish Core / UseCases / Infrastructure / Contracts per module
+- define command/query conventions
+- establish architecture tests
+- define versioned contract conventions for events and Protobuf
+- clean legacy issues and documentation from previous implementation experiments
 
-## Phase 1 — Dogfood MVP
+**Exit condition:** the repository builds with the agreed target structure and architecture rules are executable/testable rather than merely documented.
 
-Build the smallest end-to-end loop across three modules:
+## Phase 1 — Dogfood Work Management
 
-- **Smidr** (agent) — runs on at least one of the author's own machines,
-  connects outbound, reports basic health/inventory. No per-agent
-  certificate identity yet (see ADR-0003); the network is trusted because
-  it's the author's own.
-- **Heimdallr** (monitoring) — receives and displays what Smidr reports.
-  Enough to answer "is this machine okay" at a glance.
-- **Mimir** (tasks/tickets) — tracks the author's own tasks/projects, with
-  a visible link to the machine(s) they relate to.
-- **Tyr** (minimal auth) — single-user login only. Not the full identity
-  module from the old catalog — just enough to gate access.
+Build the smallest useful platform slice around Yggdrasil managing its own development.
 
-Single-tenant throughout (ADR-0002). No plugin system (ADR-0005).
+### Týr
 
-**Exit condition:** The author is using this instead of whatever
-combination of tools they used before, for at least a few real weeks.
+- local identity/authentication baseline
+- user model
+- organization membership model
+- active tenant context
 
-## Phase 2 — Build in Public + Dogfood
+### Valhalla
 
-Runs partly in parallel with Phase 1, conditions allowing (the author is
-setting up a dedicated workspace that should help this along):
+- organization creation
+- basic tenant administration
+- organization switching
 
-- Share progress periodically (devlog/repo updates) in homelab/sysadmin
-  spaces
-- Show the MVP directly to IT colleagues/contacts the author already has
-  access to and ask directly whether it solves something for them
-- Treat this as listening, not marketing — the goal is evidence, not an
-  audience
+### Mímir
 
-**Exit condition:** Some signal — positive or negative — about whether
-this is wanted beyond the author. Either outcome is useful; "nobody else
-needs this" is a valid result that keeps the project scoped to personal
-use.
+- projects
+- tasks
+- task status workflow
+- assignment
+- comments/notes sufficient for project work
+- manual time entries
+- basic start/stop timer
 
-## Phase 3 — Conditional Expansion
+### Urd
 
-Only enter this phase based on what Phase 1/2 actually showed, and only
-for the specific items that have a real trigger (see
-`docs/decisions/adr-0005-deferred-decisions-log.md`):
+- audit important identity, tenant, and work-item changes
+- establish an append-oriented audit model
 
-- Multi-tenancy, if a second real user/org shows up
-- Agent mTLS/per-agent identity, if an agent needs to run somewhere outside
-  the author's own trusted network, or before any non-solo beta
-- Plugin system, if a concrete plugin use case shows up
-- Licensing model decision, before any public sharing of source or
-  accepting outside contributions
-- Additional modules from the original 23-module catalog, picked up one
-  at a time and re-justified against current evidence, not pre-committed
+### Web
 
-There is no fixed timeline for Phase 3 — it starts when its trigger
-conditions are met, not on a calendar date.
+- login
+- organization selector
+- task/project views
+- create/update work
+- basic time tracking
+
+**Exit condition:** Yggdrasil is useful enough to manage Yggdrasil's own weekly planning and development work.
+
+## Phase 2 — Knowledge, Assets, and Service Management
+
+Expand based on dogfood experience rather than implementing the entire catalog at once.
+
+Likely candidates:
+
+- **Odin** — template-driven Markdown documentation, versions, knowledge base
+- **Freyja** — asset lifecycle and inventory
+- **Gjallarhorn** — SLA/escalation concepts
+- richer Mímir ticket/incident/request workflows
+- customer-facing interaction groundwork for Bifröst
+
+**Exit condition:** the platform supports a practical small-business/MSP work-management loop beyond project tasks alone.
+
+## Phase 3 — Endpoint and Operations Loop
+
+Introduce managed endpoint capabilities while preserving a contract-first security model.
+
+- **Smidr** — agent enrollment, heartbeat, inventory, command channel, reconnect/reconciliation
+- **Heimdallr** — endpoint health and monitoring
+- **Eir** — controlled diagnostics/remediation
+- **Urd** audit coverage for remote actions
+- gRPC/Protobuf agent contracts
+- privilege/elevation policy
+- signed/expiring commands and replay protection
+
+Windows and Linux are primary agent targets; macOS remains supported with potentially reduced capability depth.
+
+**Exit condition:** at least one real endpoint can securely report state and execute an explicitly authorized operation through Yggdrasil.
+
+## Phase 4 — Automation, Integrations, and Extensibility
+
+- **Loki** workflow/automation across modules
+- **Hermod** integrations/API gateway capabilities
+- plugin/extension SDK and versioned Protobuf contracts
+- external event subscriptions and webhooks
+- user-provided script execution policies
+
+Extensibility must use public contracts and must not grant plugins direct dependencies on module implementation assemblies.
+
+## Phase 5 — Business and Platform Expansion
+
+Candidates include:
+
+- Forseti contracts/service tracking and later billing
+- Saga scheduling/calendar
+- Verdandi notifications
+- Bifröst customer portal
+- Rán backup/recovery monitoring
+- Veðrfölnir security posture
+- Skald reporting/analytics
+- Sigrun onboarding/provisioning
+- Ymir build/deploy/release management
+- Völva predictive intelligence
+
+Each module is justified and planned independently.
+
+## Cross-Cutting Roadmap
+
+The following evolve continuously rather than belonging to one phase:
+
+- tenant isolation and database-per-tenant options
+- air-gapped installation and upgrades
+- data export/import and customer portability
+- security hardening
+- architecture tests
+- observability
+- documentation and ADRs
+- weekly project review and backlog hygiene
