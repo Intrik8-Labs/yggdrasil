@@ -1,23 +1,30 @@
 # Contributing to Yggdrasil
 
-Yggdrasil is currently a solo, dogfood-stage project and is not accepting
-unsolicited external contributions. This guide documents the development
-workflow for current maintainers and establishes expectations for future
-contributors.
+Yggdrasil is currently a solo, dogfood-stage project and is not accepting unsolicited external contributions. This guide documents the development workflow for current maintainers and establishes expectations for future contributors.
 
 ## Prerequisites
 
 - The .NET SDK selected by `global.json`
-- GNU Make for the repository shortcuts
-- Docker when building or running the container image
-- pre-commit and the tools required by `.pre-commit-config.yaml` when running
-  repository hooks
+- GNU Make for repository shortcuts
+- Docker when building or running container images
+- `pre-commit` and the tools required by `.pre-commit-config.yaml`
 
-No runtime feature may require Internet, CDN, or cloud access. Dependencies
-needed for builds and container images must be obtainable ahead of an
-air-gapped deployment.
+JetBrains Rider is the preferred IDE for C#/.NET development, but the repository must remain fully usable from the command line on Linux, macOS, and Windows.
 
-## Local workflow
+No runtime feature may require Internet, CDN, or cloud access. Dependencies needed for builds and container images must be obtainable ahead of an air-gapped deployment.
+
+## Install Git Hooks
+
+Install both normal pre-commit hooks and the Conventional Commits message hook:
+
+```shell
+pre-commit install
+pre-commit install --hook-type commit-msg
+```
+
+Commit messages must follow the policy documented in [`docs/development/WORKFLOW.md`](docs/development/WORKFLOW.md).
+
+## Local Workflow
 
 Run the complete local verification sequence before submitting a change:
 
@@ -36,30 +43,30 @@ make run
 make docker-build
 ```
 
-Use `make help` to see the current command list. Do not commit generated `bin/`
-or `obj/` directories.
+Use `make help` to see the current command list. Do not commit generated `bin/` or `obj/` directories.
+
+## Development Process
+
+The active Agile/SDLC workflow is documented in:
+
+- [`docs/development/WORKFLOW.md`](docs/development/WORKFLOW.md)
+- [`docs/development/TESTING.md`](docs/development/TESTING.md)
+- [`docs/development/RELEASES.md`](docs/development/RELEASES.md)
+- [`docs/development/AI_USAGE.md`](docs/development/AI_USAGE.md)
 
 ## Architecture
 
-- Keep domain projects independent of infrastructure frameworks.
-- Keep the shared kernel small and framework-free. Add only concepts that have
-  the same meaning across bounded contexts.
-- Do not reference another module's Domain or Infrastructure project.
-- Communicate across module boundaries through explicit contracts, events, or
-  interfaces as those integration points are introduced.
-- Put business behavior in domain and application code, not controllers or
-  persistence models.
-- Do not add NuGet packages without explicit approval and a concrete need.
-- Do not introduce generic repositories or abstractions that only wrap CRUD.
-- Add tests for every behavioral change.
+- Keep Core projects independent of infrastructure frameworks.
+- Keep the SharedKernel small and framework-free. Add only concepts that have the same meaning across bounded contexts.
+- Do not reference another module's Core, UseCases, or Infrastructure project.
+- Communicate across module boundaries through explicit public contracts and events.
+- Put business behavior in Core and UseCases, not controllers or persistence models.
+- Do not add NuGet packages without a concrete need.
+- Do not introduce generic repositories or abstractions that merely wrap CRUD.
+- Add tests for behavioral changes.
 
-Architecture decisions that affect long-term direction belong in
-`docs/decisions/`. Use the existing ADR template and explain changes to project
-boundaries or dependencies.
+Architecture decisions that affect long-term direction belong in `docs/decisions/`. Use the existing ADR template and explain changes to project boundaries, public contracts, or dependencies.
 
 ## Changes
 
-Keep changes focused and reviewable. Include a concise description of the
-problem, the chosen approach, relevant design decisions, and the verification
-commands that were run. Report failing checks rather than suppressing warnings
-or changing tests merely to make a build pass.
+Keep changes focused and reviewable. Include a concise description of the problem, the chosen approach, relevant design decisions, and verification commands that were run. Report failing checks rather than suppressing warnings or changing tests merely to make a build pass.
