@@ -2,119 +2,92 @@
 
 ## Status
 
-This charter reflects a deliberate restart. The original plan scoped
-Yggdrasil as a 23-module MSP/gov-contractor platform before any of it had
-been used by a real person for a real day. This
-version scopes down to what one person, working 5-10 hours a week, can
-actually build and use — with the larger platform as a direction to grow
-into, not a day-one requirement.
-
-## Origin
-
-This isn't a market-sized opportunity in search of a product. It comes
-from lived frustration: a government IT department that's disorganized
-in the specific, familiar ways most IT shops are; a broader trend of
-organizations stretching hardware lifespans further than they used to,
-which makes fleet visibility matter more, not less; and the daily
-annoyance of stitching together multiple disconnected tools just to get
-one coherent view of what's going on.
-
-The author has eight years of hands-on IT experience, is now working as
-a software engineer, and runs a homelab. That combination — having lived
-the problem, and now having the skills to build a real solution to it —
-is the actual reason this project exists.
+Yggdrasil is in an architecture-foundation and early dogfood phase. The project has a broad long-term platform vision, but implementation proceeds through small vertical slices and weekly iterations.
 
 ## Vision
 
-**Near-term:** A self-hosted tool the author actually uses to track tasks
-and monitor the health of their own homelab machines, end to end —
-proving the core loop (agent reports in, work gets tracked, both are
-visible in one place) before anything else is built.
+Yggdrasil is intended to become a unified operations platform for organizations that currently rely on disconnected CRM, ERP, MSP/RMM, project-management, service-management, documentation, and automation tools.
 
-**Long-term direction (not a current commitment):** A unified,
-self-hosted operations platform — monitoring, ticketing, and the rest of
-the old module catalog — for people and organizations who are tired of
-stitching together separate RMM, PSA, CRM, and billing tools. Air-gapped
-and source-visible deployment remain part of the long-term identity
-because they matter to the author personally (privacy, self-hosting,
-auditability), not because a specific paying segment has confirmed they
-need it yet.
+The system should be capable of running:
 
-## Problem Statement
+- self-hosted
+- in air-gapped environments
+- as a cloud-hosted service
 
-**What's confirmed (the author's own experience):**
+The architecture must support security-sensitive organizations, including environments with government-contractor requirements, without making enterprise-scale infrastructure a requirement for small deployments.
 
-- IT operations data is scattered across disconnected tools with no
-  unified view, even at small scale
-- Hardware is being kept in service longer, which raises the cost of not
-  having good fleet/health visibility
-- Switching between separate ticketing, monitoring, and asset tools to
-  understand "what's actually going on" is a real, recurring cost
+## Initial Audience
 
-**What's not yet confirmed:** Whether MSPs, government contractors, or
-anyone other than the author feel this strongly enough to adopt or pay
-for a tool that solves it. That's an open question this phase is designed
-to start answering, not an assumption to build 23 modules on top of.
+Early development is dogfooded first, while the long-term audience includes:
 
-## Who This Is For Right Now
+- managed service providers
+- software companies
+- small businesses
+- home businesses
+- security-sensitive organizations
 
-The author, as a homelab user and practitioner — full stop. Every
-decision in this phase is judged by "does this make my own setup better"
-first. MSP and government/defense personas from the old charter are
-retained as the long-term direction (see Non-Goals and the Roadmap), not
-as current target users.
+Dogfooding is the primary mechanism for validating the first workflows before broader product assumptions are made.
 
-## Success Criteria
+## Initial Product Goal
 
-**For this phase (next ~3 months, ~5-10 hrs/week):**
+The first useful version should allow Yggdrasil to manage its own development work.
 
-- A self-hosted instance is running on the author's own network
-- A lightweight agent reports health/inventory from at least one real
-  homelab machine
-- Tasks/tickets for the author's own projects are tracked in the same
-  system, visibly connected to the machines they relate to
-- The author is actually using it instead of whatever they used before
+The initial vertical slice includes:
 
-**Long term (unscoped, revisited as the roadmap progresses):**
+- **Týr** — identity, authentication, organization memberships, and access control foundations
+- **Valhalla** — organization and tenant administration
+- **Mímir** — projects, tasks, basic workflow, comments, and time tracking
+- **Urd** — audit of important application changes
 
-- Evidence — not assumption — that people outside the author want this
-- A sustainable path (commercial, open-source, or otherwise) that hasn't
-  been decided yet — see `docs/decisions/adr-0005-deferred-decisions-log.md`
+Smidr/Heimdallr endpoint capabilities remain important, but follow the core work-management and tenant foundation so that the platform has a secure domain model to attach them to.
 
-## Non-Goals (for this phase)
+## Architectural Identity
 
-- Not building multi-tenant/multi-organization support
-- Not building production-grade agent identity (per-agent certs,
-  revocation) — the agent only runs on the author's own trusted network
-  for now
-- Not building a plugin system — there's no plugin yet that needs one
-- Not deciding the long-term licensing model yet
-- Not building out the full 23-module catalog — see
-  `docs/modules/MODULES.md` for what's in scope now vs. deferred
+Yggdrasil is built as a modular monolith using Clean Architecture.
+
+Guiding rules include:
+
+- module implementation assemblies are private
+- modules integrate primarily through explicit public contracts and events
+- long-lived agent/plugin/extension boundaries use versioned language-neutral contracts where appropriate
+- the SharedKernel remains small and framework-free
+- dependencies are minimized and .NET platform capabilities are preferred
+- customer data must be portable through supported APIs and export/import formats
+- runtime features must not inherently require public Internet or cloud services
+
+See `docs/architecture/overview.md` and `docs/architecture/dependency-rules.md`.
+
+## Technology Direction
+
+- C# / .NET 10 / ASP.NET Core
+- PostgreSQL with EF Core/Npgsql
+- React + TypeScript
+- gRPC + Protocol Buffers for agent and other long-lived external contracts
+- OpenTelemetry
+- OCI containers
+
+The primary application language is C#, but contracts should permit agents, plugins, and extensions to use other suitable languages.
+
+## Success Criteria for the Foundation
+
+- repository structure reflects the agreed Clean Architecture module model
+- architecture rules are covered by automated tests
+- the application builds consistently on Linux, macOS, and Windows
+- initial Týr, Valhalla, Mímir, and Urd boundaries exist
+- a first task/project workflow can be dogfooded
+- important changes are auditable
+- weekly project reviews can be driven from the task backlog
 
 ## Guiding Principles
 
-- Build for yourself first; let outside validation follow real usage,
-  not precede it
-- Practical architecture over hype — premature complexity gets
-  challenged, especially given the solo/part-time reality of this project
-- Every significant decision still gets an ADR, even at this scale —
-  small projects lose context just as easily as big ones
-- Honest tradeoff assessment over optimistic framing, including about
-  scope and pace
-- A deferred decision is not a forgotten one — see the deferred decisions
-  log and revisit it as conditions change
-
-## Deployment Model (this phase)
-
-Single self-hosted instance, on the author's own home network. No SaaS,
-no multi-tenant hosting, no air-gapped deployment target yet — those
-remain long-term direction, not near-term work.
+- Build in small vertical slices.
+- Prefer understandable code over abstraction-heavy framework patterns.
+- Record meaningful architecture decisions as ADRs.
+- Do not add dependencies without a concrete need.
+- Do not break module boundaries for short-term convenience.
+- Treat air-gap compatibility, tenant isolation, security, and data portability as architectural constraints from the start.
+- Use lightweight weekly Agile planning rather than process-heavy ceremony.
 
 ## License
 
-Currently Business Source License 1.1 (see `LICENSE`), inherited from the
-original plan. This is explicitly under reconsideration — see
-`docs/decisions/adr-0005-deferred-decisions-log.md` — and should be
-treated as provisional until revisited, particularly before any public
-build-in-public sharing or outside contribution.
+Yggdrasil is currently licensed under the Business Source License 1.1. The repository `LICENSE` file is authoritative.
