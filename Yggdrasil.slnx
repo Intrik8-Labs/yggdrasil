@@ -1,4 +1,38 @@
 <Solution>
+  <Folder Name="/docs/">
+
+  </Folder>
+  <Folder Name="/docs/branding/" >
+    <File Path="docs\branding\NAMING.md" />
+  </Folder>
+  <Folder Name="/docs/decisions/" >
+    <File Path="docs\decisions\adr-0001-record-architecture-decisions.md" />
+    <File Path="docs\decisions\adr-0002-mvp-single-tenant-scope.md" />
+    <File Path="docs\decisions\adr-0003-outbound-only-agent-comms.md" />
+    <File Path="docs\decisions\adr-0004-modular-boundaries-event-driven-comms.md" />
+    <File Path="docs\decisions\adr-0005-deferred-decisions-log.md" />
+    <File Path="docs\decisions\adr-0006-dotnet-modular-clean-architecture.md" />
+    <File Path="docs\decisions\adr-template.md" />
+  </Folder>
+  <Folder Name="/docs/development/" >
+    <File Path="docs\development\AI_USAGE.md" />
+    <File Path="docs\development\RELEASES.md" />
+    <File Path="docs\development\TESTING.md" />
+    <File Path="docs\development\WORKFLOW.md" />
+  </Folder>
+  <Folder Name="/docs/modules/" >
+    <File Path="docs\modules\MIMIR.md" />
+    <File Path="docs\modules\MODULES.md" />
+  </Folder>
+  <Folder Name="/docs/planning/" >
+    <File Path="docs\planning\CHARTER.md" />
+    <File Path="docs\planning\ROADMAP.md" />
+    <File Path="docs\planning\WEEKLY_REVIEW_TEMPLATE.md" />
+  </Folder>
+  <Folder Name="/docs/architecture/">
+    <File Path="docs\architecture\dependency-rules.md" />
+    <File Path="docs\architecture\overview.md" />
+  </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/Core/">
     <Project Path="src/Core/Yggdrasil.Core.Application/Yggdrasil.Core.Application.csproj" />
