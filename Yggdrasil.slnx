@@ -33,21 +33,7 @@
   <Folder Name="/docs/architecture/">
     <File Path="docs\architecture\dependency-rules.md" />
     <File Path="docs\architecture\overview.md" />
+    <File Path="docs\architecture\SECURITY.md" />
   </Folder>
   <Folder Name="/src/" />
-  <Folder Name="/src/Core/">
-    <Project Path="src/Core/Yggdrasil.Core.Application/Yggdrasil.Core.Application.csproj" />
-    <Project Path="src/Core/Yggdrasil.Core.Domain/Yggdrasil.Core.Domain.csproj" />
-    <Project Path="src/Core/Yggdrasil.Core.Infrastructure/Yggdrasil.Core.Infrastructure.csproj" />
-    <Project Path="src/Core/Yggdrasil.SharedKernel/Yggdrasil.SharedKernel.csproj" />
-  </Folder>
-  <Folder Name="/src/Host/">
-    <Project Path="src/Host/Yggdrasil.Api/Yggdrasil.Api.csproj" />
-  </Folder>
-  <Folder Name="/src/Modules/" />
-  <Folder Name="/src/Modules/Mimir/">
-    <Project Path="src/Modules/Mimir/Yggdrasil.Mimir.Application/Yggdrasil.Mimir.Application.csproj" />
-    <Project Path="src/Modules/Mimir/Yggdrasil.Mimir.Domain/Yggdrasil.Mimir.Domain.csproj" />
-    <Project Path="src/Modules/Mimir/Yggdrasil.Mimir.Infrastructure/Yggdrasil.Mimir.Infrastructure.csproj" />
-  </Folder>
 </Solution>
