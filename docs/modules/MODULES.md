@@ -39,7 +39,10 @@ Initial responsibilities:
 - comments/notes needed for work tracking
 - time tracking
 
-The current MVP Task specification is documented in [`mimir/tasks.md`](mimir/tasks.md).
+The current Mímir MVP specifications are documented in:
+
+- [`mimir/tasks.md`](mimir/tasks.md)
+- [`mimir/notes.md`](mimir/notes.md)
 
 ### Urd
 Audit trail and compliance logging.
