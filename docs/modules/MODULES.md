@@ -42,7 +42,9 @@ Initial responsibilities:
 The current Mímir MVP specifications are documented in:
 
 - [`mimir/tasks.md`](mimir/tasks.md)
+- [`mimir/projects.md`](mimir/projects.md)
 - [`mimir/notes.md`](mimir/notes.md)
+- [`mimir/time-entries.md`](mimir/time-entries.md)
 
 ### Urd
 Audit trail and compliance logging.
