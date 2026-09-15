@@ -387,10 +387,16 @@ Time tracking belongs to Mímir because time is recorded against work.
 Task MVP should eventually support:
 
 - manual time entry
-- basic start/stop timer
+- start/stop timers
+- multiple active timers when work legitimately overlaps
+- overlap detection/reporting
 - actor
 - timestamp/start/end or duration
 - optional description/note
+
+All Time Entries attach directly to Tasks. Projects aggregate Task time rather than accepting direct Time Entries.
+
+Projects also receive system-managed Project Activity Tasks for **Planning**, **Meetings**, and **Administration** so Project-level overhead remains visible without cluttering normal Task views. Future organizations may configure additional reusable Project Activity categories.
 
 Billing, cost accounting, and advanced resource planning are outside the initial Task MVP.
 
@@ -434,6 +440,7 @@ The Task domain must enforce at least these invariants:
 11. Promotion, completion, reopening, cancellation, and meaningful ownership/context changes are auditable.
 12. History is preserved by default; destructive deletion is exceptional.
 13. Core object semantics are not tenant-configurable.
+14. Project Activity Tasks remain distinct from normal execution Tasks and do not contribute to normal completion percentages.
 
 ## Explicit MVP Exclusions
 
