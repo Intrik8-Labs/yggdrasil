@@ -28,7 +28,7 @@ Initial responsibilities:
 ### Mímir
 Work management.
 
-Long-term responsibilities include tasks, tickets, projects, epics, sprints, incidents, requests, and related workflows.
+Long-term responsibilities center on tasks, projects, work tracking, time tracking, and related workflows. Ticket lifecycle ownership is intentionally deferred and may remain in Mímir initially or move to a dedicated module later.
 
 Initial responsibilities:
 
@@ -45,6 +45,7 @@ The current Mímir MVP specifications are documented in:
 - [`mimir/projects.md`](mimir/projects.md)
 - [`mimir/notes.md`](mimir/notes.md)
 - [`mimir/time-entries.md`](mimir/time-entries.md)
+- [`mimir/boundaries-events.md`](mimir/boundaries-events.md)
 
 ### Urd
 Audit trail and compliance logging.
@@ -60,7 +61,7 @@ Initial responsibilities:
 | Module | Responsibility |
 | --- | --- |
 | **Týr** | Authentication, identity, membership, and access control |
-| **Mímir** | Work, tickets, tasks, projects, epics, sprints, incidents, and time tracking |
+| **Mímir** | Tasks, projects, work tracking, time tracking, and related work context; Ticket ownership remains deferred |
 | **Valhalla** | Administration and tenant management |
 | **Bifröst** | Customer-facing portal |
 | **Gjallarhorn** | SLAs, escalation, and issue/service-management policy |
@@ -107,17 +108,17 @@ Mímir should combine:
 
 The goal is not to clone any of those products. Common operations should remain fast while advanced configuration stays available without dominating everyday use.
 
-Potential work types include:
+Current core work concepts include:
 
 - Task
-- Ticket
-- Incident
-- Request
-- Problem
-- Story
-- Epic
+- Project
+- Note
+- Time Entry
+- Project Activity
 
-Projects remain a separate concept rather than inheriting from WorkItem.
+Ticket ownership remains intentionally deferred. Mímir may reference Tickets and create/link Tasks from them through stable contracts without assuming permanent Ticket lifecycle ownership.
+
+Projects remain a separate concept rather than inheriting from a generic WorkItem.
 
 ## Time Tracking
 
