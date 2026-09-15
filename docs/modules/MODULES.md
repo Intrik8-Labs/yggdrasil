@@ -46,6 +46,7 @@ The current Mímir MVP specifications are documented in:
 - [`mimir/notes.md`](mimir/notes.md)
 - [`mimir/time-entries.md`](mimir/time-entries.md)
 - [`mimir/boundaries-events.md`](mimir/boundaries-events.md)
+- [`mimir/implementation-plan.md`](mimir/implementation-plan.md)
 
 ### Urd
 Audit trail and compliance logging.
