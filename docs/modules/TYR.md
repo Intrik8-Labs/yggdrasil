@@ -40,7 +40,7 @@ Týr does not own:
 - workflow automation — Loki
 - contracts/billing — Forseti
 
-Týr may expose stable contracts for identity and authorization information, but other modules must not reference Týr Core, UseCases, or Infrastructure assemblies.
+Týr may expose stable interfaces for identity and authorization information, but other modules must not reach into Týr's private models, services, or persistence details.
 
 ## Core Model
 
@@ -131,7 +131,7 @@ Týr should support multiple authentication mechanisms over time without forcing
 
 The initial release should support a secure local authentication mechanism sufficient for dogfooding.
 
-Implementation choices should use established ASP.NET Core/.NET security facilities where they meet requirements rather than inventing custom cryptography or password protocols.
+Implementation choices should use established Rails security facilities where they meet requirements rather than inventing custom cryptography or password protocols.
 
 At minimum, local authentication should account for:
 
@@ -461,9 +461,9 @@ The first Týr slice should provide only what is necessary to securely support t
 
 These are valid future capabilities but should not block the first dogfood deployment.
 
-## Initial Use Cases
+## Initial Workflows
 
-Likely first UseCases include:
+Likely first workflows include:
 
 ```text
 Users/
@@ -483,7 +483,7 @@ Authorization/
 └── GetEffectivePermissions/
 ```
 
-The specific authentication plumbing may live partly in Infrastructure/host integration, but business access rules and membership behavior should remain testable outside ASP.NET controllers.
+The specific authentication plumbing may use Rails framework integration, but business access rules and membership behavior should remain testable outside controllers.
 
 ## Initial Aggregate Candidates
 
@@ -556,7 +556,7 @@ Import behavior must not allow privileged access to be silently created without 
 
 Resolve incrementally:
 
-1. Which ASP.NET Core authentication/session model best fits local auth plus future federation?
+1. Which Rails authentication/session approach best fits local auth plus future federation?
 2. Should authorization permissions be claims-based, policy-resolved, database-resolved, or hybrid?
 3. What is the required permission-revocation latency?
 4. How are built-in versus organization-defined roles represented?

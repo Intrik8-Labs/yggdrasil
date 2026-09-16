@@ -1,10 +1,8 @@
-- Do not add NuGet packages without explicit approval.
-- Do not change public contracts without explicit approval.
-- Domain projects may not depend on infrastructure frameworks.
-- Modules may not reference another module's Domain or Infrastructure.
-- Prefer explicit domain behavior over anemic setters.
-- Do not create generic repositories.
-- Do not bypass tenant or authorization abstractions.
+- The MVP is a Ruby on Rails application; do not reintroduce the retired .NET implementation.
+- Do not add gems or JavaScript packages without a concrete need.
+- Keep business behavior in models and focused service objects, not controllers or callbacks with hidden side effects.
+- Keep module boundaries explicit through namespaces and public interfaces.
+- Do not bypass tenant scoping or authorization checks.
 - Every behavioral change requires tests.
-- Do not suppress analyzer warnings to make a build pass.
-- Do not alter architecture tests without explaining why.
+- Do not disable linters or weaken tests merely to make a check pass.
+- Do not alter architecture checks without explaining why.

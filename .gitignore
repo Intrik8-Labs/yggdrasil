@@ -1,2 +1,14 @@
-**/bin/
-**/obj/
+.bundle/
+.env*
+!.env.example
+.idea/
+coverage/
+log/*
+node_modules/
+public/assets/
+storage/*
+tmp/*
+
+# Rails credentials are machine-specific secrets.
+config/master.key
+config/credentials/*.key

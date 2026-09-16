@@ -4,12 +4,12 @@ Yggdrasil is currently a solo, dogfood-stage project and is not accepting unsoli
 
 ## Prerequisites
 
-- The .NET SDK selected by `global.json`
-- GNU Make for repository shortcuts
-- Docker when building or running container images
+- Ruby and Rails versions selected by the application once it is generated
+- PostgreSQL
+- GNU Make for repository workflow shortcuts
 - `pre-commit` and the tools required by `.pre-commit-config.yaml`
 
-JetBrains Rider is the preferred IDE for C#/.NET development, but the repository must remain fully usable from the command line on Linux, macOS, and Windows.
+The repository must remain usable from standard command-line tooling. No editor or IDE is required.
 
 No runtime feature may require Internet, CDN, or cloud access. Dependencies needed for builds and container images must be obtainable ahead of an air-gapped deployment.
 
@@ -26,24 +26,9 @@ Commit messages must follow the policy documented in [`docs/development/WORKFLOW
 
 ## Local Workflow
 
-Run the complete local verification sequence before submitting a change:
+The Rails application has not been generated yet, so application-specific setup and verification commands are intentionally not documented. Once the app exists, keep the canonical setup, test, lint, and run commands here and expose stable shortcuts where useful.
 
-```shell
-make check
-```
-
-Individual commands are also available:
-
-```shell
-make restore
-make build
-make format
-make test
-make run
-make docker-build
-```
-
-Use `make help` to see the current command list. Do not commit generated `bin/` or `obj/` directories.
+Use `make help` to see the current repository workflow commands.
 
 ## Development Process
 
@@ -56,16 +41,15 @@ The active Agile/SDLC workflow is documented in:
 
 ## Architecture
 
-- Keep Core projects independent of infrastructure frameworks.
-- Keep the SharedKernel small and framework-free. Add only concepts that have the same meaning across bounded contexts.
-- Do not reference another module's Core, UseCases, or Infrastructure project.
-- Communicate across module boundaries through explicit public contracts and events.
-- Put business behavior in Core and UseCases, not controllers or persistence models.
-- Do not add NuGet packages without a concrete need.
-- Do not introduce generic repositories or abstractions that merely wrap CRUD.
+- Organize business areas with explicit Ruby namespaces and ownership boundaries.
+- Keep controllers focused on HTTP concerns and orchestration.
+- Put business behavior near the models it governs or in focused service objects when orchestration spans models.
+- Communicate across module boundaries through explicit public interfaces and events where asynchronous behavior is justified.
+- Do not add gems or JavaScript packages without a concrete need.
+- Use Active Record directly unless a demonstrated need justifies another persistence abstraction.
 - Add tests for behavioral changes.
 
-Architecture decisions that affect long-term direction belong in `docs/decisions/`. Use the existing ADR template and explain changes to project boundaries, public contracts, or dependencies.
+Architecture decisions that affect long-term direction belong in `docs/decisions/`. Use the existing ADR template and explain changes to module boundaries, public contracts, or dependencies.
 
 ## Changes
 

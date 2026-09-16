@@ -41,7 +41,7 @@ Valhalla does not own:
 - automation — Loki
 - assets — Freyja
 
-Other modules must consume Valhalla through stable public contracts/events rather than referencing its Core, UseCases, or Infrastructure assemblies.
+Other modules must consume Valhalla through stable public interfaces and events rather than reaching into its private models, services, or persistence details.
 
 ## Core Concepts
 
@@ -430,9 +430,9 @@ The first Valhalla slice should be small.
 
 These can be added when real requirements justify them.
 
-## Initial Use Cases
+## Initial Workflows
 
-Likely first UseCases include:
+Likely first workflows include:
 
 ```text
 Organizations/

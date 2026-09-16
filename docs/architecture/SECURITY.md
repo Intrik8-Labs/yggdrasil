@@ -382,7 +382,7 @@ Stale commands must not automatically execute after an agent reconnects unless p
 
 Plugins/extensions are untrusted relative to the platform core unless explicitly trusted.
 
-They must not reference internal module assemblies.
+They must not reference internal module implementation details.
 
 Public contracts should define capabilities.
 
@@ -658,7 +658,7 @@ Resolve as implementation progresses:
 
 1. What local authentication/session mechanism will be used initially?
 2. What is the minimum MFA support required before external beta?
-3. Which tenant isolation safeguards should be enforced at EF Core/database level?
+3. Which tenant isolation safeguards should be enforced at the Active Record/database level?
 4. What deployment profile first requires database-per-tenant?
 5. What secret-store abstractions are worth supporting directly?
 6. Which operations require reauthentication?

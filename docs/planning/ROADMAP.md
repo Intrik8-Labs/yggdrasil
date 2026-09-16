@@ -2,21 +2,19 @@
 
 Yggdrasil is developed incrementally with lightweight weekly iterations. The roadmap defines direction and exit conditions rather than fixed delivery dates.
 
-## Phase 0 — Architecture Foundation (current)
+## Phase 0 — Rails MVP Foundation (current)
 
 Establish the long-lived project foundation before feature expansion.
 
-- confirm .NET 10 / ASP.NET Core as the primary platform
-- adopt modular monolith + Clean Architecture
-- define strict module dependency rules
-- establish `SharedKernel` boundaries
-- establish Core / UseCases / Infrastructure / Contracts per module
-- define command/query conventions
-- establish architecture tests
+- establish Ruby on Rails with PostgreSQL as the MVP platform
+- adopt a modular Rails monolith
+- define pragmatic namespace and dependency rules
+- establish tenant context and authorization boundaries
+- establish the test, lint, and security-check baseline
 - define versioned contract conventions for events and Protobuf
 - clean legacy issues and documentation from previous implementation experiments
 
-**Exit condition:** the repository builds with the agreed target structure and architecture rules are executable/testable rather than merely documented.
+**Exit condition:** the generated Rails application runs locally, its verification suite passes, and one thin vertical slice proves the namespace and tenancy conventions.
 
 ## Phase 1 — Dogfood Work Management
 
@@ -98,7 +96,7 @@ Windows and Linux are primary agent targets; macOS remains supported with potent
 - external event subscriptions and webhooks
 - user-provided script execution policies
 
-Extensibility must use public contracts and must not grant plugins direct dependencies on module implementation assemblies.
+Extensibility must use public contracts and must not grant plugins direct dependencies on internal module implementation details.
 
 ## Phase 5 — Business and Platform Expansion
 
@@ -125,7 +123,7 @@ The following evolve continuously rather than belonging to one phase:
 - air-gapped installation and upgrades
 - data export/import and customer portability
 - security hardening
-- architecture tests
+- boundary and architecture checks
 - observability
 - documentation and ADRs
 - weekly project review and backlog hygiene

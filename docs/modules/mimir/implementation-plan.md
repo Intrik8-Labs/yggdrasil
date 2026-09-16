@@ -35,26 +35,25 @@ When implementation behavior conflicts with these documents, update the specific
 
 # Phase 0 — Module Foundation
 
-## MIMIR-001 — Verify module project boundaries
+## MIMIR-001 — Establish the Mímir namespace boundary
 
-**Outcome:** Mímir has the required Clean Architecture project boundaries and references.
+**Outcome:** Mímir has a clear Rails namespace and ownership boundary.
 
 Check:
 
-- Mímir Core/Domain project
-- Mímir UseCases/Application project
-- Mímir Infrastructure project
-- Mímir Presentation project
-- Mímir Contracts project if not already present
-- architecture-test coverage for forbidden cross-module references
+- `Mimir` namespacing for owned models and services
+- routes and controllers that delegate business behavior
+- tenant scoping for all owned records
+- a deliberate public interface for cross-module queries
+- boundary-check coverage for forbidden private references
 
 **Acceptance criteria**
 
-- Core references only allowed foundational projects
-- UseCases references Core and approved Contracts only
-- Infrastructure references Core/UseCases as allowed
-- Contracts references no Mímir implementation projects
-- Presentation contains transport concerns only
+- Mímir does not reach into another module's private constants or persistence details
+- other modules do not query Mímir tables directly
+- public interfaces return stable values or identifiers rather than internal models
+- controllers and views contain no business rules
+- tenant-owned queries cannot escape the active tenant
 
 ---
 
@@ -607,7 +606,7 @@ Support reporting by:
 
 # Phase 7 — Audit & Integration Contracts
 
-## MIMIR-070 — Define Mímir Contracts assembly
+## MIMIR-070 — Define Mímir public contracts
 
 Add only deliberately public contracts.
 
@@ -897,14 +896,14 @@ UUID possession must never bypass tenant authorization.
 
 ---
 
-## MIMIR-115 — Architecture tests
+## MIMIR-115 — Architecture and boundary checks
 
 Enforce:
 
-- no cross-module implementation references
-- Contracts independence
-- Core independence from EF/ASP.NET
-- Presentation without business logic
+- no cross-module access to private implementation details
+- external contract independence from Active Record models
+- enforced tenant scoping
+- controllers and views without business logic
 
 ---
 

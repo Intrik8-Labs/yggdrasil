@@ -139,6 +139,6 @@ Forseti may later consume time-entry contracts for billing; Skald may consume th
 
 ## Extensibility
 
-Future plugins and extensions integrate through versioned public contracts rather than implementation assemblies.
+Future plugins and extensions integrate through versioned public contracts rather than internal implementation details.
 
 Protocol Buffers are expected for long-lived language-neutral plugin, extension, and agent contracts where appropriate.

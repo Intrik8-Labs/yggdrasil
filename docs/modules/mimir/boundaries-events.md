@@ -13,7 +13,7 @@ Other modules may interact with Mímir through:
 - supported commands/APIs
 - published integration events
 
-Other modules must not depend directly on Mímir Domain, Application, or Infrastructure implementation assemblies.
+Other modules must not depend directly on Mímir's private models, services, or persistence details.
 
 > **Mímir owns work. Other modules may reference or react to work without taking ownership of its lifecycle.**
 
@@ -446,7 +446,7 @@ Avoid unrestricted persistence-style updates that bypass domain rules.
 
 Protocol Buffers are appropriate for long-lived language-neutral boundaries where justified, especially plugins, agents, extensions, external integrations, and stable event schemas.
 
-Internal in-process .NET contracts do not require Protobuf by default.
+Internal in-process Ruby interfaces do not require Protobuf by default.
 
 ## Failure Boundaries
 
@@ -465,7 +465,7 @@ The Task remains completed; notification handling retries independently.
 ## Business Invariants
 
 1. Mímir owns Task/Project/Note/Time lifecycle state.
-2. Mímir implementation assemblies remain private.
+2. Mímir implementation details remain private.
 3. Cross-module access uses public contracts/events.
 4. External identities are stable identifiers, not foreign internal entities.
 5. UUID knowledge never bypasses tenant authorization.

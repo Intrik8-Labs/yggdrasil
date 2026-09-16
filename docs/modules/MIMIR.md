@@ -41,7 +41,7 @@ Mímir does not own:
 - knowledge/document management — Odin
 - reporting/analytics — Skald
 
-Mímir may reference external concepts only through stable identifiers and public contracts. It must not reference another module's Core, UseCases, or Infrastructure assemblies.
+Mímir may reference external concepts only through stable identifiers and public interfaces. It must not reach into another module's private models, services, or persistence details.
 
 ## Product Principles
 
@@ -236,7 +236,7 @@ Whether TimeEntry becomes a fully independent aggregate should be decided based 
 
 ## Events and Contracts
 
-Mímir implementation assemblies are private.
+Mímir implementation details are private.
 
 Other modules interact with Mímir through public contracts and events.
 
@@ -326,9 +326,9 @@ The first Mímir slice should remain deliberately small.
 
 These remain valid future capabilities but should not block dogfooding.
 
-## Initial Use Cases
+## Initial Workflows
 
-The first UseCases may include:
+The first workflows may include:
 
 ```text
 Tasks/

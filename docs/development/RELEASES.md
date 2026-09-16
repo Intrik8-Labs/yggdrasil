@@ -58,8 +58,8 @@ Before creating a release:
 
 - the intended scope is complete
 - acceptance criteria are satisfied
-- `make check` passes
-- architecture tests pass
+- the documented Rails verification command passes
+- boundary and architecture checks pass
 - relevant integration/end-to-end tests pass
 - database migrations are reviewed and tested
 - public contract compatibility is reviewed

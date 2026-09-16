@@ -8,20 +8,20 @@ The long-term target is a CRM/ERP/MSP-style platform that can run as self-hosted
 
 ## Architecture
 
-Yggdrasil is being built as a **modular monolith using Clean Architecture**.
+Yggdrasil is being built as a **modular Ruby on Rails monolith**. The MVP favors Rails conventions and small vertical slices over a framework-heavy internal architecture.
 
-Each module owns its domain and exposes stable contracts rather than allowing other modules to reference its implementation. Cross-module interaction should primarily use explicit contracts and events. This same boundary will support future plugins, extensions, agents, and potential service extraction.
+Each module owns its domain and exposes clear boundaries rather than allowing unrelated features to reach into its implementation. Long-lived external boundaries remain versioned so future plugins, agents, and selective service extraction are possible without making the MVP distributed.
 
 The primary application stack is:
 
-- C# / .NET 10 / ASP.NET Core
-- PostgreSQL with EF Core and Npgsql
-- React + TypeScript for the web client
+- Ruby on Rails
+- PostgreSQL through Active Record
+- Hotwire and server-rendered HTML by default
 - gRPC + Protocol Buffers for long-lived agent/plugin contracts where appropriate
 - OpenTelemetry for vendor-neutral observability
 - OCI containers for portable deployment
 
-Yggdrasil intentionally minimizes third-party dependencies. Platform functionality is preferred when it adequately solves the problem.
+Yggdrasil intentionally minimizes third-party dependencies. Rails and Ruby standard-library functionality is preferred when it adequately solves the problem.
 
 See [`docs/architecture/overview.md`](docs/architecture/overview.md) and [`docs/architecture/dependency-rules.md`](docs/architecture/dependency-rules.md).
 
@@ -42,7 +42,7 @@ Future modules include Smidr agent orchestration, Heimdallr monitoring, Odin kno
 
 Yggdrasil is intentionally being developed as a long-term engineering project rather than as an AI-generated application.
 
-- **Primary IDE:** JetBrains Rider is the preferred development environment for C#/.NET work, while keeping the repository fully buildable from the command line on Linux, macOS, and Windows.
+- **Tool independence:** the repository must remain usable from standard command-line tooling; no particular editor or IDE is required.
 - **Human-authored production code:** application and domain code should primarily be designed and written by the maintainer rather than generated wholesale by AI.
 - **AI as an engineering aid:** AI may be used for documentation, research, architecture discussion, code review, test-case discovery, edge-case analysis, and explaining unfamiliar APIs or concepts.
 - **Tests remain engineering artifacts:** AI can suggest test scenarios and help identify missing cases, but tests should be reviewed, understood, and owned by the maintainer.
@@ -55,7 +55,7 @@ The objective is to use AI to improve reasoning and documentation without outsou
 - Customer data belongs to the customer and must be easy to export and import.
 - Core functionality must work without Internet or cloud dependencies.
 - Security and tenant isolation are architectural requirements, not later add-ons.
-- Module implementation assemblies are private; contracts and events are public boundaries.
+- Internal module implementation details remain private; contracts and events define public boundaries.
 - Prefer understandable code over abstraction-heavy enterprise patterns.
 - Significant long-term decisions are recorded as ADRs.
 - Development follows lightweight weekly Agile iterations suitable for a solo project.
@@ -84,7 +84,7 @@ The Intrik8 name should remain prominent in public branding to distinguish the p
 
 Prerequisites and repository commands are documented in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-The repository is currently in an architecture-foundation phase. Existing code and issues from earlier experiments are being reconciled with the current .NET modular-monolith direction.
+The earlier .NET skeleton has been retired. The repository currently contains product and architecture documentation and is ready for the Rails MVP application to be generated.
 
 ## License
 
