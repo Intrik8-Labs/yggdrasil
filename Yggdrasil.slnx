@@ -35,5 +35,17 @@
     <File Path="docs\architecture\overview.md" />
     <File Path="docs\architecture\SECURITY.md" />
   </Folder>
-  <Folder Name="/src/" />
+  <Folder Name="/src/">
+    <Project Path="src/Yggdrasil.SharedKernel/Yggdrasil.SharedKernel.csproj" />
+  </Folder>
+  <Folder Name="/src/Hosts/">
+    <Project Path="src/Hosts/Yggdrasil.Api/Yggdrasil.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Tyr/">
+    <Project Path="src/Modules/Tyr/Yggdrasil.Tyr.Contracts/Yggdrasil.Tyr.Contracts.csproj" />
+    <Project Path="src/Modules/Tyr/Yggdrasil.Tyr.Core/Yggdrasil.Tyr.Core.csproj" />
+    <Project Path="src/Modules/Tyr/Yggdrasil.Tyr.Infrastructure/Yggdrasil.Tyr.Infrastructure.csproj" />
+    <Project Path="src/Modules/Tyr/Yggdrasil.Tyr.UseCases/Yggdrasil.Tyr.UseCases.csproj" />
+  </Folder>
 </Solution>
