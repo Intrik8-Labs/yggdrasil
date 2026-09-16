@@ -1,0 +1,103 @@
+# Yggdrasil development environment and common tasks.
+#
+# Install tools:
+#   mise install
+#
+# List tasks:
+#   mise tasks ls
+#
+# Run a task:
+#   mise run <task>
+
+[tools]
+ruby = "4.0.7"
+
+[env]
+RAILS_ENV = "development"
+
+[tasks.setup]
+description = "Install dependencies and prepare the development database"
+run = "bin/setup"
+
+[tasks.dev]
+description = "Start the Rails development environment"
+run = "bin/dev"
+
+[tasks.server]
+description = "Start the Rails server"
+alias = "s"
+run = "bin/rails server"
+
+[tasks.console]
+description = "Open the Rails console"
+alias = "c"
+run = "bin/rails console"
+
+[tasks.routes]
+description = "Display application routes"
+run = "bin/rails routes"
+
+[tasks.test]
+description = "Run the Rails test suite"
+alias = "t"
+run = "bin/rails test"
+
+[tasks."test:system"]
+description = "Run Rails system tests"
+run = "bin/rails test:system"
+
+[tasks."test:all"]
+description = "Run unit/integration and system tests"
+run = [
+  "bin/rails test",
+  "bin/rails test:system",
+]
+
+[tasks.lint]
+description = "Run RuboCop"
+run = "bin/rubocop"
+
+[tasks."lint:fix"]
+description = "Run RuboCop with safe automatic corrections"
+run = "bin/rubocop -a"
+
+[tasks.security]
+description = "Run the Rails static security scanner"
+run = "bin/brakeman --no-pager"
+
+[tasks.check]
+description = "Run tests, linting, and security checks"
+run = [
+  { task = "test" },
+  { task = "lint" },
+  { task = "security" },
+]
+
+[tasks.ci]
+description = "Run the repository CI script"
+run = "bin/ci"
+
+[tasks."db:prepare"]
+description = "Create, migrate, and seed the database as needed"
+run = "bin/rails db:prepare"
+
+[tasks."db:migrate"]
+description = "Run pending database migrations"
+run = "bin/rails db:migrate"
+
+[tasks."db:rollback"]
+description = "Roll back the most recent database migration"
+run = "bin/rails db:rollback"
+
+[tasks."db:seed"]
+description = "Load database seed data"
+run = "bin/rails db:seed"
+
+[tasks."db:reset"]
+description = "Recreate the development database from scratch"
+confirm = "Reset the development database? This destroys local development data."
+run = "bin/rails db:drop db:create db:migrate db:seed"
+
+[tasks.clean]
+description = "Clear Rails temporary files and logs"
+run = "bin/rails tmp:clear log:clear"
