@@ -25,6 +25,39 @@ The interface should prioritize:
 
 Modules should compose Yggdrasil components rather than invent independent application experiences.
 
+## Styling Foundation
+
+Tailwind CSS is the preferred styling foundation for the Yggdrasil frontend.
+
+Tailwind is responsible for implementing:
+
+- spacing and layout
+- typography
+- responsive behavior
+- light and dark themes
+- borders, radii, and elevation
+- component interaction states
+- semantic design tokens
+
+Tailwind utility classes should normally be encapsulated inside reusable Yggdrasil React components. Feature screens should prefer:
+
+```tsx
+<Button variant="primary">Save</Button>
+<StatusBadge status="in-progress" />
+```
+
+over repeatedly reconstructing the same visual rules with large inline class lists.
+
+The Yggdrasil design system owns the component API and visual semantics. Tailwind is an implementation tool beneath that system.
+
+Accessibility-focused unstyled primitives such as Radix UI or React Aria should be evaluated for menus, dialogs, popovers, selection controls, and related interaction-heavy foundations.
+
+TanStack Table should be evaluated for complex table behavior such as sorting, selection, resizing, virtualization, and configurable columns while allowing Yggdrasil to retain full visual control.
+
+TanStack Query should be evaluated for remote/server-state behavior independently from presentation styling.
+
+A source-owned component approach similar to shadcn/ui may be used selectively as a starting point, but third-party component defaults must not define the Yggdrasil design system.
+
 ## 2. Component Ownership
 
 Components are divided into four levels.
