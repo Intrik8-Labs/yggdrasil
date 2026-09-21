@@ -81,11 +81,19 @@ Primary stack:
 Likely supporting technologies:
 
 - React Router
-- TanStack Query
+- Tailwind CSS as the styling foundation
+- Yggdrasil-owned reusable React components
+- Radix UI primitives or React Aria as accessibility-focused primitive candidates
+- TanStack Query for remote/server state
+- TanStack Table for data-grid/table behavior
 - IndexedDB abstraction for future persistent/offline data
 - OpenAPI for HTTP contracts
 - WebSocket and/or Server-Sent Events for real-time events
 - Tauri for a possible desktop distribution
+
+Tailwind should provide styling utilities and design-token implementation, but it should not become the component architecture. Screens should compose reusable Yggdrasil components rather than repeat large utility-class strings throughout feature code.
+
+Radix UI, React Aria, TanStack Query, and TanStack Table are preferred implementation candidates, not irreversible framework dependencies. The Yggdrasil component and application contracts should remain the stable boundary.
 
 These dependencies should remain replaceable where practical.
 
