@@ -2,15 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <RootNamespace>Yggdrasil.Tyr.Infrastructure</RootNamespace>
-    <AssemblyName>Yggdrasil.Tyr.Infrastructure</AssemblyName>
+    <RootNamespace>Yggdrasil.Tyr.Application</RootNamespace>
+    <AssemblyName>Yggdrasil.Tyr.Application</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="../Yggdrasil.Tyr.Domain/Yggdrasil.Tyr.Domain.csproj" />
-    <ProjectReference Include="../Yggdrasil.Tyr.Application/Yggdrasil.Tyr.Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,12 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Yggdrasil.Api</RootNamespace>
+    <AssemblyName>Yggdrasil.Api</AssemblyName>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../modules/tyr/Yggdrasil.Tyr.Application/Yggdrasil.Tyr.Application.csproj" />
+    <ProjectReference Include="../../modules/tyr/Yggdrasil.Tyr.Infrastructure/Yggdrasil.Tyr.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
