@@ -11,17 +11,15 @@
 
 | Version | Date       | Author        | Notes                                             |
 | ------- | ---------- | ------------- | -------------------------------------------------- |
-| 1.0     | 2026-06-28 | Jason Scherer | Restart of ADR-0001, rescoped for solo/MVP phase   |
+| 1.0     | 2026-06-28 | Jason Scherer | Decision-record policy for the solo/MVP phase   |
 
 ---
 
 ## Context
 
-Yggdrasil is restarting from a from-scratch planning pass after an earlier
-attempt scoped a 23-module platform and went through three language
-migrations before anything was dogfooded. This restart is
-deliberately smaller in scope (see `docs/planning/CHARTER.md`) and solo,
-at roughly 5-10 hours/week.
+Yggdrasil is a solo .NET project with a focused dogfood scope (see
+`docs/planning/CHARTER.md`) and roughly 5-10 hours/week available for
+development.
 
 Even at this scale, decisions will be made about architecture, scope, and
 what to defer — and a solo, part-time project loses context just as

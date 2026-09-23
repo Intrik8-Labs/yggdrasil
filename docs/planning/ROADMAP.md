@@ -2,19 +2,19 @@
 
 Yggdrasil is developed incrementally with lightweight weekly iterations. The roadmap defines direction and exit conditions rather than fixed delivery dates.
 
-## Phase 0 — Rails MVP Foundation (current)
+## Phase 0 — .NET Foundation (current)
 
 Establish the long-lived project foundation before feature expansion.
 
-- establish Ruby on Rails with PostgreSQL as the MVP platform
-- adopt a modular Rails monolith
+- build on .NET 10 and ASP.NET Core, with EF Core/Npgsql for PostgreSQL persistence
+- establish Core, UseCases, Infrastructure, and Contracts boundaries within the modular monolith
 - define pragmatic namespace and dependency rules
 - establish tenant context and authorization boundaries
 - establish the test, lint, and security-check baseline
 - define versioned contract conventions for events and Protobuf
-- clean legacy issues and documentation from previous implementation experiments
+- keep repository tooling, documentation, and backlog aligned with the .NET architecture
 
-**Exit condition:** the generated Rails application runs locally, its verification suite passes, and one thin vertical slice proves the namespace and tenancy conventions.
+**Exit condition:** the ASP.NET Core application runs locally, its verification suite passes, and one thin vertical slice proves the namespace and tenancy conventions.
 
 ## Phase 1 — Dogfood Work Management
 

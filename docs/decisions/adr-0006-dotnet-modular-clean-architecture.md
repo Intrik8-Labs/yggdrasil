@@ -2,24 +2,21 @@
 
 | Field | Value |
 | --- | --- |
-| Status | SUPERSEDED |
+| Status | ACCEPTED |
 | Date | 2026-09-03 |
 | Deciders | Intrik8 Labs |
-| Superseded By | ADR-0007 |
 
 ## Context
 
 Yggdrasil is intended to grow into a long-lived CRM/ERP/MSP-style operations platform while remaining deployable in self-hosted, air-gapped, and cloud environments. The project needs strong domain boundaries without taking on the operational cost of microservices during early development.
 
-Earlier experiments used or considered multiple language and infrastructure stacks. The current design needs a stable implementation direction that supports rich business-domain modeling, strong typing, command/query use cases, gRPC/Protobuf contracts, cross-platform development, and deliberate dependency boundaries.
+The platform needs a stable implementation direction that supports rich business-domain modeling, strong typing, command/query use cases, gRPC/Protobuf contracts, cross-platform development, and deliberate dependency boundaries.
 
 ## Decision
 
-> This decision is retained as history. ADR-0007 replaces it for the MVP.
-
 Yggdrasil will use:
 
-- C# and .NET 10+ as the primary application platform
+- C# and .NET 10 as the primary application platform
 - ASP.NET Core for application hosts and HTTP APIs
 - a modular monolith as the initial deployment architecture
 - Clean Architecture boundaries within each business module
@@ -68,4 +65,3 @@ Rejected because Yggdrasil's long-term module catalog benefits from explicit bou
 - `docs/architecture/overview.md`
 - `docs/architecture/dependency-rules.md`
 - `docs/decisions/adr-0004-modular-boundaries-event-driven-comms.md`
-- `docs/decisions/adr-0007-rails-mvp-monolith.md`

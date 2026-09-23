@@ -58,7 +58,7 @@ Before creating a release:
 
 - the intended scope is complete
 - acceptance criteria are satisfied
-- the documented Rails verification command passes
+- `mise run ci` passes for the Release configuration
 - boundary and architecture checks pass
 - relevant integration/end-to-end tests pass
 - database migrations are reviewed and tested

@@ -530,7 +530,7 @@ Self-hosted/air-gapped users should retain complete local access to their audit 
 Resolve incrementally:
 
 1. Which initial audit events require synchronous/durable-before-success guarantees?
-2. What transactional outbox design should be used once Active Record persistence is established?
+2. What transactional outbox design should be used once EF Core persistence is established?
 3. Should Urd share the primary database initially or have a separate schema/database?
 4. What audit action naming/versioning convention should be standardized?
 5. How much before/after change data is appropriate by default?
@@ -539,7 +539,7 @@ Resolve incrementally:
 8. When should cryptographic hash chaining/signatures be introduced?
 9. Which records are platform-level rather than tenant-level?
 10. How should audit records reference deleted/archived actors and resources?
-11. Should audit event contracts be internal Ruby objects first or standardized external schemas from the start?
+11. Should audit event contracts be internal C# records first or standardized external schemas from the start?
 12. Which authentication events are useful enough to retain without creating excessive privacy/noise concerns?
 
 ## Success Criteria

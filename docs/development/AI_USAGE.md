@@ -65,8 +65,8 @@ AI-written documentation must still accurately reflect the implementation and cu
 
 ## IDE and Tooling
 
-No particular editor or IDE is required for Rails development.
+No particular editor or IDE is required for .NET development.
 
-The repository must remain buildable and testable from standard command-line tooling on Linux, macOS, and Windows where the selected Ruby toolchain is supported.
+The repository must remain buildable and testable from standard command-line tooling on Linux, macOS, and Windows where the .NET SDK is supported.
 
 AI-specific IDE integrations are optional and should not become required development infrastructure.

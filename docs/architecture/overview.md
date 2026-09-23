@@ -11,43 +11,49 @@ The platform must support self-hosted and air-gapped deployments, strong tenant 
 
 ## Architectural Style
 
-The MVP is a modular Ruby on Rails monolith. Rails owns the web application, background jobs, and relational persistence. PostgreSQL is the system of record.
+Yggdrasil is a C# and .NET 10 modular monolith. ASP.NET Core hosts HTTP APIs and composes application services. Background processing uses .NET hosted services where appropriate. PostgreSQL is the planned system of record, accessed through EF Core/Npgsql infrastructure adapters.
 
-Business areas use explicit Ruby namespaces such as `Tyr`, `Valhalla`, `Mimir`, and `Urd`. Namespaces communicate through small public interfaces and domain events rather than reaching into one another's private implementation. This is a code-ownership boundary inside one deployable application, not a reason to build internal services prematurely.
+Business areas use explicit C# namespaces and assemblies such as `Yggdrasil.Tyr`, `Yggdrasil.Valhalla`, `Yggdrasil.Mimir`, and `Yggdrasil.Urd`. Each module separates Core, UseCases, Infrastructure, and Contracts. Modules communicate through public contracts and events; implementation assemblies remain private. Hosts compose modules within one deployment.
 
-Prefer Rails conventions for ordinary application behavior:
+Use focused .NET components for application behavior:
 
-- server-rendered HTML and Hotwire for the first web interface
-- Active Record models, validations, associations, scopes, and transactions
-- Active Job for work that belongs outside the request cycle
-- focused service objects for multi-model orchestration
+- ASP.NET Core endpoints for HTTP concerns
+- framework-independent domain entities and value objects for business invariants
+- explicit command/query use cases for orchestration
+- EF Core configurations and transactions within persistence infrastructure
+- hosted services for background execution, with explicit retry and durability requirements
 - PostgreSQL constraints for invariants the database can enforce
 
 ## Primary Technology Direction
 
-- **Application:** Ruby on Rails
-- **Web UI:** server-rendered HTML with Hotwire by default
-- **Database:** PostgreSQL through Active Record
+- **Application:** C# and .NET 10 with ASP.NET Core
+- **Web UI:** React + TypeScript + Vite, with the component architecture documented separately
+- **Database:** PostgreSQL through EF Core/Npgsql
 - **External API:** REST/JSON when an external consumer requires it
 - **Agent contracts:** gRPC and Protocol Buffers where a long-lived language-neutral boundary is justified
 - **Observability:** OpenTelemetry when operational needs justify it
 - **Deployment:** OCI containers
 
-The exact Ruby and Rails versions will be recorded by the generated application rather than prescribed before it exists.
+The SDK major version is selected in `mise.toml`; the API project targets `net10.0`. The current implementation is an API scaffold. Persistence, module assemblies, and the frontend below describe the target architecture.
 
 ## Target Repository Shape
 
 ```text
 yggdrasil/
-├── app/
-│   ├── controllers/
-│   ├── jobs/
-│   ├── models/
-│   ├── services/
-│   └── views/
-├── config/
-├── db/
-├── test/
+├── yggdrasil.slnx
+├── mise.toml
+├── src/
+│   ├── hosts/
+│   │   └── Yggdrasil.Api/
+│   ├── modules/
+│   │   └── <Module>/
+│   │       ├── Yggdrasil.<Module>.Core/
+│   │       ├── Yggdrasil.<Module>.UseCases/
+│   │       ├── Yggdrasil.<Module>.Infrastructure/
+│   │       └── Yggdrasil.<Module>.Contracts/
+│   └── shared/
+│       └── Yggdrasil.SharedKernel/
+├── tests/
 ├── docs/
 └── contracts/
     ├── proto/
@@ -69,7 +75,7 @@ Shared code must represent a genuinely shared concept. A general-purpose dumping
 
 ## External Contracts
 
-The Rails application's internal Ruby APIs may evolve with the MVP. Long-lived external contracts require explicit versioning.
+Internal C# interfaces may evolve with the product. Long-lived external contracts require explicit versioning.
 
 Protocol Buffers are reserved primarily for boundaries such as Smidr agents, plugins, and future service-to-service APIs. Internal model objects must not be exposed as external contracts.
 
@@ -96,7 +102,7 @@ The relational schema is an implementation detail, not the official long-term in
 
 ## Dependency Policy
 
-Prefer Rails, Ruby, and PostgreSQL capabilities before adding another dependency. A new gem or JavaScript package needs a concrete use case, a clear maintenance benefit, and an understood security and upgrade cost.
+Prefer .NET, ASP.NET Core, and PostgreSQL capabilities before adding another dependency. A new NuGet or JavaScript package needs a concrete use case, a clear maintenance benefit, and an understood security and upgrade cost.
 
 ## Development Process
 

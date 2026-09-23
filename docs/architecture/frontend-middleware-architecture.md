@@ -2,7 +2,7 @@
 
 **Status:** Draft
 **Version:** 0.1
-**Current backend:** Ruby on Rails MVP
+**Current backend:** ASP.NET Core on .NET 10
 **Frontend direction:** React + TypeScript + Vite
 **Desktop direction:** Web-first, with Tauri considered for desktop packaging later
 
@@ -10,7 +10,7 @@
 
 Yggdrasil's frontend should behave as a desktop-class business application while remaining usable through a normal browser.
 
-The frontend must remain sufficiently independent from the backend implementation that replacing Ruby on Rails with another backend technology should not require rewriting the user interface.
+The frontend communicates with the ASP.NET Core backend through explicit, versioned contracts so internal domain and persistence changes do not require rewriting the user interface.
 
 The frontend should support:
 
@@ -29,7 +29,7 @@ The frontend should support:
 
 ### 2.1 The frontend is an independent application
 
-The frontend must not depend on Rails implementation details.
+The frontend must not depend on ASP.NET Core implementation details.
 
 It should communicate with the backend through explicit contracts.
 
@@ -43,20 +43,20 @@ Yggdrasil Client API
 Versioned HTTP/Event Contract
    |
    v
-Rails MVP
+ASP.NET Core API
 ```
 
-A future backend should be able to replace Rails without major changes to UI code.
+Backend implementation changes must preserve the published contracts consumed by the UI.
 
 ### 2.2 Backend implementation objects must not leak into the UI
 
 Frontend models should not directly represent:
 
-- ActiveRecord models
-- Rails controllers
-- Rails serialization conventions
+- EF Core entities
+- ASP.NET Core controllers
+- ASP.NET Core serialization conventions
 - Database schemas
-- Rails routes
+- ASP.NET Core routes
 
 Backend DTOs should be translated through the frontend data layer.
 
@@ -577,7 +577,7 @@ modules/
 
 Frontend modules must not mirror backend implementation internals.
 
-Mimir remains Mimir regardless of whether the backend implementation is Ruby, C#, Go, or another language.
+Mimir owns its domain vocabulary across C# backend contracts and TypeScript frontend models.
 
 ## 20. Suggested Project Structure
 
@@ -636,7 +636,7 @@ Transport Adapter
 HTTP / Events
       |
       v
-Rails
+ASP.NET Core
 ```
 
 Transport concerns belong below the application/domain layer.
@@ -651,7 +651,7 @@ Examples:
 - retry policy
 - network status
 
-A React page should never need to know how Rails handles these concerns.
+A React page should never need to know how ASP.NET Core handles these concerns.
 
 ## 22. API Errors
 
@@ -667,7 +667,7 @@ type ApplicationError =
   | UnexpectedError;
 ```
 
-Components should respond to application-level errors rather than Rails-specific HTTP implementation details.
+Components should respond to application-level errors rather than ASP.NET Core-specific HTTP implementation details.
 
 ## 23. Real-Time Events
 
@@ -757,7 +757,7 @@ Modules compose standard components rather than creating incompatible versions o
 
 The following should be considered initial frontend rules.
 
-1. UI components must not directly depend on Rails.
+1. UI components must not directly depend on ASP.NET Core.
 2. UI components should not directly perform arbitrary HTTP requests.
 3. Backend DTOs must not become frontend domain models by default.
 4. Backend APIs must be accessed through explicit adapters/repositories.

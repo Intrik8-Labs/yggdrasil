@@ -7,7 +7,7 @@ Tests protect business behavior, security assumptions, data integrity, and maint
 ## Testing Principles
 
 - Test behavior and invariants rather than implementation details.
-- Prefer fast model and service tests for business rules.
+- Prefer fast domain and use-case unit tests for business rules.
 - Add request and integration tests where routing, authentication, persistence, or contracts matter.
 - Keep system tests focused on critical user journeys.
 - Use the same PostgreSQL behavior in integration tests that production relies on.
@@ -15,17 +15,17 @@ Tests protect business behavior, security assumptions, data integrity, and maint
 
 ## Test Layers
 
-### Model Tests
+### Domain Tests
 
-Model tests cover validations, relationships, state transitions, scopes, and business behavior. Examples include rejecting invalid task transitions, preventing negative time entries, and preserving tenant ownership.
+Domain tests cover invariants, value objects, state transitions, and business behavior without requiring ASP.NET Core or EF Core. Examples include rejecting invalid task transitions, preventing negative time entries, and preserving tenant ownership.
 
-### Service and Job Tests
+### Use-Case and Background-Service Tests
 
-Focused service tests cover multi-model use cases and transaction behavior. Job tests cover enqueueing, retries, idempotency, and observable outcomes rather than framework internals.
+Use-case tests cover orchestration through application-owned interfaces. Infrastructure integration tests cover EF Core mappings and transaction behavior against PostgreSQL. Background-service tests cover retries, idempotency, cancellation, and observable outcomes.
 
-### Request Tests
+### HTTP Integration Tests
 
-Request tests cover routes, authentication, authorization, tenant selection, parameter handling, and response contracts.
+ASP.NET Core integration tests cover routes, authentication, authorization, tenant selection, parameter handling, and response contracts.
 
 ### System Tests
 
@@ -54,7 +54,11 @@ Schema changes should verify migrations, constraints, indexes, tenant-isolation 
 
 ## Local Verification
 
-The Rails app has not been generated yet. Once it exists, document one canonical command that runs the application test, lint, security, and boundary checks required before merge.
+Run `mise run check` for restore, build, formatting verification, and `dotnet test`. Use `mise run ci` for Release configuration and `pre-commit run --all-files` for repository hygiene and secret checks.
+
+The solution currently contains an ASP.NET Core API scaffold with no application test projects. Add .NET test projects to `yggdrasil.slnx` alongside behavioral implementation; a successful test command with no tests does not establish coverage. Tenant-isolation, security, and architecture tests must be added as the corresponding components are implemented.
+
+The Python commit-message hook tests run separately with `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v`.
 
 ## AI and Tests
 

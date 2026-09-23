@@ -37,7 +37,7 @@ When implementation behavior conflicts with these documents, update the specific
 
 ## MIMIR-001 — Establish the Mímir namespace boundary
 
-**Outcome:** Mímir has a clear Rails namespace and ownership boundary.
+**Outcome:** Mímir has a clear C# namespace, module assembly structure, and ownership boundary.
 
 Check:
 
@@ -901,7 +901,7 @@ UUID possession must never bypass tenant authorization.
 Enforce:
 
 - no cross-module access to private implementation details
-- external contract independence from Active Record models
+- external contract independence from EF Core entities
 - enforced tenant scoping
 - controllers and views without business logic
 

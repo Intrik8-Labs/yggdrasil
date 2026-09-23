@@ -43,7 +43,7 @@ Smidr/Heimdallr endpoint capabilities remain important, but follow the core work
 
 ## Architectural Identity
 
-Yggdrasil is built as a modular Ruby on Rails monolith. The MVP follows Rails conventions while preserving clear ownership between business areas.
+Yggdrasil is built on C# and .NET 10 as a modular monolith. Clean Architecture boundaries preserve clear ownership between business areas and separate domain behavior from infrastructure.
 
 Guiding rules include:
 
@@ -51,7 +51,7 @@ Guiding rules include:
 - modules integrate primarily through explicit public contracts and events
 - long-lived agent/plugin/extension boundaries use versioned language-neutral contracts where appropriate
 - shared code is kept small and limited to genuinely shared concepts
-- dependencies are minimized and Rails/Ruby capabilities are preferred
+- dependencies are minimized and .NET and ASP.NET Core capabilities are preferred
 - customer data must be portable through supported APIs and export/import formats
 - runtime features must not inherently require public Internet or cloud services
 
@@ -59,18 +59,18 @@ See `docs/architecture/overview.md` and `docs/architecture/dependency-rules.md`.
 
 ## Technology Direction
 
-- Ruby on Rails
-- PostgreSQL through Active Record
-- server-rendered HTML and Hotwire by default
+- C# and .NET 10 with ASP.NET Core
+- PostgreSQL through EF Core/Npgsql
+- React + TypeScript + Vite for the web frontend
 - gRPC + Protocol Buffers for agent and other long-lived external contracts
 - OpenTelemetry
 - OCI containers
 
-The primary application language is Ruby, but contracts should permit agents, plugins, and extensions to use other suitable languages.
+The primary application language is C#, but contracts should permit agents, plugins, and extensions to use other suitable languages.
 
 ## Success Criteria for the Foundation
 
-- repository structure reflects the modular Rails application
+- repository structure reflects the modular .NET application
 - critical boundary and tenant-isolation rules are covered by automated tests
 - the application builds consistently on Linux, macOS, and Windows
 - initial Týr, Valhalla, Mímir, and Urd boundaries exist

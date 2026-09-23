@@ -1,27 +1,27 @@
 # Týr MVP Design
 
-**Status:** Draft for the Rails MVP
+**Status:** Draft for the .NET platform
 
 ## Purpose
 
 Týr owns human identity, authentication, organization membership, and the authorization foundation. It does not own organization details or business workflows belonging to other modules.
 
-## Rails Direction
+## .NET Design
 
-Týr is implemented inside the Rails monolith under an explicit `Tyr` namespace. Authentication may use a focused, well-maintained Rails solution once the application is generated, but the domain concepts must not be collapsed into framework session details.
+Týr is designed as a .NET module under `Yggdrasil.Tyr`, with Core, UseCases, Infrastructure, and Contracts assemblies. ASP.NET Core authentication and authorization integrate at the host and infrastructure boundaries; domain concepts remain independent of framework session details.
 
 Initial concepts are:
 
 - `User` — a human identity and lifecycle
 - `Membership` — a user's role and status in an organization
 - `Session` — an authenticated browser session
-- `Current` context — the authenticated user and active organization for one request or job
+- request-scoped tenant and user context — the authenticated user and active organization for one request or job
 
 Valhalla owns organizations. Týr may reference an organization by stable identifier and query a deliberately public Valhalla interface; it must not own organization settings.
 
 ## Authentication
 
-The MVP should support local authentication without requiring an external identity provider. Password storage must use Rails-supported secure password hashing, secrets must stay out of source control, and session cookies must use secure production settings.
+The MVP should support local authentication without requiring an external identity provider. Password storage must use ASP.NET Core Identity password-hashing facilities, secrets must stay out of source control, and session cookies must use secure production settings.
 
 Authentication establishes who the user is. It does not by itself grant access to an organization's data.
 
@@ -46,7 +46,7 @@ Meaningful identity events may include:
 - membership created, changed, suspended, or removed
 - active organization changed
 
-Urd consumes the events that require an audit record. Events carry stable identifiers and relevant metadata, not live Active Record instances or password/session secrets.
+Urd consumes the events that require an audit record. Events carry stable identifiers and relevant metadata, not tracked EF Core entities or password/session secrets.
 
 ## Security Requirements
 
@@ -65,6 +65,6 @@ Urd consumes the events that require an audit record. Events carry stable identi
 4. authorization policy boundary
 5. login, logout, and organization selection
 6. audit events for sensitive identity and membership changes
-7. request and system tests for cross-tenant and unauthorized paths
+7. HTTP integration and end-to-end tests for cross-tenant and unauthorized paths
 
-Implementation details should be refined against the generated Rails application and recorded in an ADR when they create a long-lived constraint.
+Implementation details should be refined against the ASP.NET Core host and module boundaries and recorded in an ADR when they create a long-lived constraint.

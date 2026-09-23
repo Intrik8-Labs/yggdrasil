@@ -17,9 +17,9 @@
 
 ## Context
 
-This restart deliberately scoped down a much larger original plan (see
-`docs/planning/CHARTER.md`). Scoping down means a number of real
-decisions are being postponed rather than made. Postponed decisions that
+The project prioritizes a focused dogfood scope (see
+`docs/planning/CHARTER.md`). Decisions beyond that scope are deliberately
+postponed until a concrete product need justifies them. Postponed decisions that
 aren't written down tend to either get forgotten or get quietly
 re-decided by default (i.e., never revisited, which is itself a decision
 nobody chose deliberately).

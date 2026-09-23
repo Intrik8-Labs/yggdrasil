@@ -446,7 +446,7 @@ Avoid unrestricted persistence-style updates that bypass domain rules.
 
 Protocol Buffers are appropriate for long-lived language-neutral boundaries where justified, especially plugins, agents, extensions, external integrations, and stable event schemas.
 
-Internal in-process Ruby interfaces do not require Protobuf by default.
+Internal in-process C# interfaces do not require Protobuf by default.
 
 ## Failure Boundaries
 

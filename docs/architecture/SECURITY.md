@@ -658,7 +658,7 @@ Resolve as implementation progresses:
 
 1. What local authentication/session mechanism will be used initially?
 2. What is the minimum MFA support required before external beta?
-3. Which tenant isolation safeguards should be enforced at the Active Record/database level?
+3. Which tenant isolation safeguards should be enforced at the EF Core/database level?
 4. What deployment profile first requires database-per-tenant?
 5. What secret-store abstractions are worth supporting directly?
 6. Which operations require reauthentication?
