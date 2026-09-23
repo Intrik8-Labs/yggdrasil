@@ -1,9 +1,9 @@
 # Yggdrasil Frontend & Middleware Architecture
 
-**Status:** Draft  
-**Version:** 0.1  
-**Current backend:** Ruby on Rails MVP  
-**Frontend direction:** React + TypeScript + Vite  
+**Status:** Draft
+**Version:** 0.1
+**Current backend:** Ruby on Rails MVP
+**Frontend direction:** React + TypeScript + Vite
 **Desktop direction:** Web-first, with Tauri considered for desktop packaging later
 
 ## 1. Purpose

@@ -8,19 +8,19 @@ What was the single primary outcome for this week?
 
 ## Completed
 
-- 
+-
 
 ## In Progress
 
-- 
+-
 
 ## Blocked
 
-- 
+-
 
 ## Architecture / Product Decisions
 
-- 
+-
 
 ## What Changed
 
@@ -36,9 +36,9 @@ Only record metrics that help make a decision.
 
 ## Next Week — Top Three
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ## Backlog Hygiene
 

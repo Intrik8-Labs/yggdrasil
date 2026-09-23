@@ -1,9 +1,9 @@
 # Yggdrasil UI Component Architecture
 
-**Status:** Draft  
-**Version:** 0.1  
-**Reference:** Approved Yggdrasil master application design  
-**Frontend:** React + TypeScript  
+**Status:** Draft
+**Version:** 0.1
+**Reference:** Approved Yggdrasil master application design
+**Frontend:** React + TypeScript
 **Scope:** Application shell, reusable components, interaction patterns, module extension points
 
 ## 1. Design Philosophy

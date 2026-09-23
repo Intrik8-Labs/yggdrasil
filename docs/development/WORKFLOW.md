@@ -178,7 +178,6 @@ Install all hooks with:
 
 ```shell
 pre-commit install
-pre-commit install --hook-type commit-msg
 ```
 
 ## Weekly Review

@@ -1,6 +1,6 @@
 # Yggdrasil Architecture Overview
 
-**Status:** Draft  
+**Status:** Draft
 **Version:** 0.2
 
 ## Purpose
