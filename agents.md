@@ -1,7 +1,7 @@
-- The MVP is a Ruby on Rails application; do not reintroduce the retired .NET implementation.
-- Do not add gems or JavaScript packages without a concrete need.
-- Keep business behavior in models and focused service objects, not controllers or callbacks with hidden side effects.
-- Keep module boundaries explicit through namespaces and public interfaces.
+- Yggdrasil is a C# and .NET application. Use .NET 10 and ASP.NET Core, with explicit modular Clean Architecture boundaries.
+- Do not add NuGet or JavaScript packages without a concrete need.
+- Keep business invariants in module Core projects and orchestration in UseCases. Keep HTTP endpoints and controllers thin; avoid hidden side effects.
+- Keep module boundaries explicit through C# namespaces, assemblies, and public contracts. Do not reference another module’s Core, UseCases, or Infrastructure implementation.
 - Do not bypass tenant scoping or authorization checks.
 - Every behavioral change requires tests.
 - Do not disable linters or weaken tests merely to make a check pass.

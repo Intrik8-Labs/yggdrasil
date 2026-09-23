@@ -8,20 +8,20 @@ The long-term target is a CRM/ERP/MSP-style platform that can run as self-hosted
 
 ## Architecture
 
-Yggdrasil is being built as a **modular Ruby on Rails monolith**. The MVP favors Rails conventions and small vertical slices over a framework-heavy internal architecture.
+Yggdrasil is built on **C# and .NET 10**, using ASP.NET Core and a modular monolith architecture. Development proceeds in small vertical slices with explicit domain, use-case, infrastructure, and contract boundaries.
 
 Each module owns its domain and exposes clear boundaries rather than allowing unrelated features to reach into its implementation. Long-lived external boundaries remain versioned so future plugins, agents, and selective service extraction are possible without making the MVP distributed.
 
 The primary application stack is:
 
-- Ruby on Rails
-- PostgreSQL through Active Record
-- Hotwire and server-rendered HTML by default
+- C# and .NET 10 with ASP.NET Core
+- PostgreSQL with EF Core/Npgsql
+- React + TypeScript + Vite for the planned web frontend
 - gRPC + Protocol Buffers for long-lived agent/plugin contracts where appropriate
 - OpenTelemetry for vendor-neutral observability
 - OCI containers for portable deployment
 
-Yggdrasil intentionally minimizes third-party dependencies. Rails and Ruby standard-library functionality is preferred when it adequately solves the problem.
+Yggdrasil intentionally minimizes third-party dependencies. .NET and ASP.NET Core functionality is preferred when it adequately solves the problem.
 
 See [`docs/architecture/overview.md`](docs/architecture/overview.md) and [`docs/architecture/dependency-rules.md`](docs/architecture/dependency-rules.md).
 
@@ -84,7 +84,7 @@ The Intrik8 name should remain prominent in public branding to distinguish the p
 
 Prerequisites and repository commands are documented in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-The earlier .NET skeleton has been retired. The repository currently contains product and architecture documentation and is ready for the Rails MVP application to be generated.
+The repository contains `yggdrasil.slnx` and an ASP.NET Core API scaffold at `src/hosts/Yggdrasil.Api`. Business modules, database persistence, and the web frontend are planned and will be added through focused vertical slices. Use `mise install` to install the .NET 10 SDK and `mise run check` to run the current solution checks.
 
 ## License
 

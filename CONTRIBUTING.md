@@ -4,8 +4,9 @@ Yggdrasil is currently a solo, dogfood-stage project and is not accepting unsoli
 
 ## Prerequisites
 
-- Ruby and Rails versions selected by the application once it is generated
-- PostgreSQL
+- mise and the .NET 10 SDK selected by `mise.toml`
+- Python 3 for the commit-message hook and its tests
+- PostgreSQL when implementing or running database-backed features
 - GNU Make for repository workflow shortcuts
 - `pre-commit` and the tools required by `.pre-commit-config.yaml`
 
@@ -29,7 +30,18 @@ Commit messages must follow the policy documented in [`docs/development/WORKFLOW
 
 ## Local Workflow
 
-The Rails application has not been generated yet, so application-specific setup and verification commands are intentionally not documented. Once the app exists, keep the canonical setup, test, lint, and run commands here and expose stable shortcuts where useful.
+The solution is `yggdrasil.slnx`; the ASP.NET Core API host is `src/hosts/Yggdrasil.Api`.
+
+```shell
+mise install
+mise run setup
+mise run build
+mise exec -- dotnet run --project src/hosts/Yggdrasil.Api
+```
+
+Run `mise run check` for restore, build, formatting verification, and tests. Use `mise run ci` for the Release configuration, `mise run lint:fix` to apply formatting, and `mise tasks ls` to list all tasks.
+
+The current solution contains an API scaffold. Business modules, EF Core persistence, the React frontend, and application test projects are still to be implemented. A successful `dotnet test` without test projects is not evidence of application test coverage.
 
 Use `make help` to see the current repository workflow commands.
 
@@ -44,12 +56,12 @@ The active Agile/SDLC workflow is documented in:
 
 ## Architecture
 
-- Organize business areas with explicit Ruby namespaces and ownership boundaries.
+- Organize business areas with explicit C# namespaces and assemblies and ownership boundaries.
 - Keep controllers focused on HTTP concerns and orchestration.
-- Put business behavior near the models it governs or in focused service objects when orchestration spans models.
+- Put business invariants in module Core projects and use-case orchestration in UseCases; keep infrastructure adapters outside the domain.
 - Communicate across module boundaries through explicit public interfaces and events where asynchronous behavior is justified.
-- Do not add gems or JavaScript packages without a concrete need.
-- Use Active Record directly unless a demonstrated need justifies another persistence abstraction.
+- Do not add NuGet or JavaScript packages without a concrete need.
+- Use EF Core/Npgsql for PostgreSQL persistence in Infrastructure. Expose only the application-owned interfaces needed by use cases; avoid generic wrappers that merely rename CRUD operations.
 - Add tests for behavioral changes.
 
 Architecture decisions that affect long-term direction belong in `docs/decisions/`. Use the existing ADR template and explain changes to module boundaries, public contracts, or dependencies.
