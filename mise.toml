@@ -1,103 +1,58 @@
 # Yggdrasil development environment and common tasks.
-#
-# Install tools:
-#   mise install
-#
-# List tasks:
-#   mise tasks ls
-#
-# Run a task:
-#   mise run <task>
+# Install the .NET 10 SDK: mise install
+# List tasks: mise tasks ls
+# Run a task: mise run <task>
+# Build tasks expect a project or solution in the repository root.
 
 [tools]
-ruby = "4.0.7"
-
-[env]
-RAILS_ENV = "development"
+dotnet = "10"
 
 [tasks.setup]
-description = "Install dependencies and prepare the development database"
-run = "bin/setup"
+description = "Restore NuGet dependencies"
+alias = "restore"
+run = "dotnet restore"
 
-[tasks.dev]
-description = "Start the Rails development environment"
-run = "bin/dev"
-
-[tasks.server]
-description = "Start the Rails server"
-alias = "s"
-run = "bin/rails server"
-
-[tasks.console]
-description = "Open the Rails console"
-alias = "c"
-run = "bin/rails console"
-
-[tasks.routes]
-description = "Display application routes"
-run = "bin/rails routes"
+[tasks.build]
+description = "Build the solution"
+alias = "b"
+run = "dotnet build"
 
 [tasks.test]
-description = "Run the Rails test suite"
+description = "Build and run the test suite"
 alias = "t"
-run = "bin/rails test"
-
-[tasks."test:system"]
-description = "Run Rails system tests"
-run = "bin/rails test:system"
-
-[tasks."test:all"]
-description = "Run unit/integration and system tests"
-run = [
-  "bin/rails test",
-  "bin/rails test:system",
-]
+run = "dotnet test"
 
 [tasks.lint]
-description = "Run RuboCop"
-run = "bin/rubocop"
+description = "Verify .NET formatting and code style"
+run = "dotnet format --verify-no-changes"
 
 [tasks."lint:fix"]
-description = "Run RuboCop with safe automatic corrections"
-run = "bin/rubocop -a"
+description = "Apply .NET formatting and code style fixes"
+alias = "format"
+run = "dotnet format"
 
-[tasks.security]
-description = "Run the Rails static security scanner"
-run = "bin/brakeman --no-pager"
+[tasks.clean]
+description = "Clean .NET build outputs"
+run = "dotnet clean"
+
+[tasks.publish]
+description = "Publish in Release configuration"
+run = "dotnet publish --configuration Release"
 
 [tasks.check]
-description = "Run tests, linting, and security checks"
+description = "Build, verify formatting, and run tests"
 run = [
-  { task = "test" },
-  { task = "lint" },
-  { task = "security" },
+  "dotnet restore",
+  "dotnet build --no-restore",
+  "dotnet format --verify-no-changes --no-restore",
+  "dotnet test --no-build --no-restore",
 ]
 
 [tasks.ci]
-description = "Run the repository CI script"
-run = "bin/ci"
-
-[tasks."db:prepare"]
-description = "Create, migrate, and seed the database as needed"
-run = "bin/rails db:prepare"
-
-[tasks."db:migrate"]
-description = "Run pending database migrations"
-run = "bin/rails db:migrate"
-
-[tasks."db:rollback"]
-description = "Roll back the most recent database migration"
-run = "bin/rails db:rollback"
-
-[tasks."db:seed"]
-description = "Load database seed data"
-run = "bin/rails db:seed"
-
-[tasks."db:reset"]
-description = "Recreate the development database from scratch"
-confirm = "Reset the development database? This destroys local development data."
-run = "bin/rails db:drop db:create db:migrate db:seed"
-
-[tasks.clean]
-description = "Clear Rails temporary files and logs"
-run = "bin/rails tmp:clear log:clear"
+description = "Restore, build, verify formatting, and test in Release configuration"
+run = [
+  "dotnet restore",
+  "dotnet build --configuration Release --no-restore",
+  "dotnet format --verify-no-changes --no-restore",
+  "dotnet test --configuration Release --no-build --no-restore",
+]
