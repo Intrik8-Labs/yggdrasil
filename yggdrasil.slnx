@@ -1,2 +1,5 @@
 <Solution>
+  <Folder Name="/hosts/">
+    <Project Path="src/hosts/Yggdrasil.Api/Yggdrasil.Api.csproj" />
+  </Folder>
 </Solution>

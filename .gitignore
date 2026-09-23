@@ -1,14 +1,58 @@
-.bundle/
-.env*
-!.env.example
-.idea/
-coverage/
-log/*
-node_modules/
-public/assets/
-storage/*
-tmp/*
+# .NET build and publish outputs
+[Bb]in/
+[Oo]bj/
+/artifacts/
+*.binlog
+*.nupkg
+*.snupkg
 
-# Rails credentials are machine-specific secrets.
-config/master.key
-config/credentials/*.key
+# Test results and coverage
+[Tt]est[Rr]esults/
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+*.trx
+
+# Rider, ReSharper, and Visual Studio local state
+.idea/
+.vs/
+_ReSharper*/
+*.DotSettings.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Local configuration and secrets (shared appsettings remain tracked)
+.env
+.env.*
+!.env.example
+!.env.*.example
+appsettings.Local.json
+appsettings.*.Local.json
+*.pfx
+*.p12
+*.publishsettings
+*.pubxml.user
+
+# Logs and temporary files
+*.log
+/logs/
+/tmp/
+*.tmp
+*.bak
+
+# Frontend dependencies
+node_modules/
+
+# Python tooling caches
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
