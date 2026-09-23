@@ -19,8 +19,11 @@ Install both normal pre-commit hooks and the Conventional Commits message hook:
 
 ```shell
 pre-commit install
-pre-commit install --hook-type commit-msg
 ```
+
+The configuration installs both hook stages by default. File checks include YAML/TOML validation, secret detection, and .NET formatting through `mise run lint` when C# or project files change. Install mise and run `mise install` before committing .NET changes; formatting requires a root project or solution.
+
+Run all file checks with `pre-commit run --all-files`. Run commit-message regression tests with `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v`.
 
 Commit messages must follow the policy documented in [`docs/development/WORKFLOW.md`](docs/development/WORKFLOW.md).
 
