@@ -84,7 +84,7 @@ The Intrik8 name should remain prominent in public branding to distinguish the p
 
 Prerequisites and repository commands are documented in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-The repository contains `yggdrasil.slnx` and an ASP.NET Core API scaffold at `src/hosts/Yggdrasil.Api`. Business modules, database persistence, and the web frontend are planned and will be added through focused vertical slices. Use `mise install` to install the .NET 10 SDK and `mise run check` to run the current solution checks.
+The repository contains `yggdrasil.slnx` and an ASP.NET Core API scaffold at `src/hosts/Yggdrasil.Api`. Module scaffolding lives under `src/modules`, with shared domain concepts under `src/shared`. Business workflows, database persistence, and the web frontend are developed through focused vertical slices. Use `mise install` to install the .NET 10 SDK and `mise run check` to run the current solution checks.
 
 ## License
 

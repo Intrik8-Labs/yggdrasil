@@ -1,7 +1,7 @@
 - Yggdrasil is a C# and .NET application. Use .NET 10 and ASP.NET Core, with explicit modular Clean Architecture boundaries.
 - Do not add NuGet or JavaScript packages without a concrete need.
-- Keep business invariants in module Core projects and orchestration in UseCases. Keep HTTP endpoints and controllers thin; avoid hidden side effects.
-- Keep module boundaries explicit through C# namespaces, assemblies, and public contracts. Do not reference another module’s Core, UseCases, or Infrastructure implementation.
+- Keep business invariants in module Domain projects and orchestration in Application. Keep HTTP endpoints and controllers thin; avoid hidden side effects.
+- Keep module boundaries explicit through C# namespaces, assemblies, and public contracts. Do not reference another module’s Domain, Application, or Infrastructure implementation.
 - Do not bypass tenant scoping or authorization checks.
 - Every behavioral change requires tests.
 - Do not disable linters or weaken tests merely to make a check pass.

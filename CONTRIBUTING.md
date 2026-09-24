@@ -41,7 +41,7 @@ mise exec -- dotnet run --project src/hosts/Yggdrasil.Api
 
 Run `mise run check` for restore, build, formatting verification, and tests. Use `mise run ci` for the Release configuration, `mise run lint:fix` to apply formatting, and `mise tasks ls` to list all tasks.
 
-The current solution contains an API scaffold. Business modules, EF Core persistence, the React frontend, and application test projects are still to be implemented. A successful `dotnet test` without test projects is not evidence of application test coverage.
+The current solution includes the API host. Module and SharedKernel scaffolding lives under `src/modules` and `src/shared`; add projects to `yggdrasil.slnx` as they are integrated. Business workflows, EF Core persistence, the React frontend, and application test coverage are developed incrementally. A successful `dotnet test` without test projects is not evidence of application test coverage.
 
 Use `make help` to see the current repository workflow commands.
 
@@ -56,9 +56,9 @@ The active Agile/SDLC workflow is documented in:
 
 ## Architecture
 
-- Organize business areas with explicit C# namespaces and assemblies and ownership boundaries.
+- Organize business areas with explicit C# namespaces, assemblies, and ownership boundaries.
 - Keep controllers focused on HTTP concerns and orchestration.
-- Put business invariants in module Core projects and use-case orchestration in UseCases; keep infrastructure adapters outside the domain.
+- Put business invariants in module Domain projects and use-case orchestration in Application; keep infrastructure adapters outside the domain.
 - Communicate across module boundaries through explicit public interfaces and events where asynchronous behavior is justified.
 - Do not add NuGet or JavaScript packages without a concrete need.
 - Use EF Core/Npgsql for PostgreSQL persistence in Infrastructure. Expose only the application-owned interfaces needed by use cases; avoid generic wrappers that merely rename CRUD operations.
