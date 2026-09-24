@@ -43,7 +43,7 @@ Valhalla does not own:
 
 Other modules must consume Valhalla through stable public interfaces and events rather than reaching into its private models, services, or persistence details.
 
-## Core Concepts
+## Domain Concepts
 
 ### Organization
 

@@ -42,7 +42,7 @@ Týr does not own:
 
 Týr may expose stable interfaces for identity and authorization information, but other modules must not reach into Týr's private models, services, or persistence details.
 
-## Core Model
+## Domain Model
 
 ### User
 

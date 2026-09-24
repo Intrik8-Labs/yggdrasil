@@ -20,7 +20,7 @@ A key design principle is:
 | --- | --- | --- |
 | P0 | Task fundamentals | Create, view, edit, complete, reopen, and cancel tasks |
 | P0 | Task identity | Stable UUIDv7 system identity plus human-readable task key |
-| P0 | Core content | Title and optional description |
+| P0 | Domain content | Title and optional description |
 | P0 | Ownership metadata | Created/updated timestamps and actors |
 | P0 | Status | To Do, In Progress, Done, Cancelled |
 | P0 | Priority | Low, Normal, High, Urgent; Normal by default |
@@ -108,7 +108,7 @@ The original Task remains auditable and searchable. It records an explicit relat
 
 Do not rename `TASK-184` to `PRJ-184`. Human-facing identifiers may already exist in notes, audit events, exports, integrations, URLs, emails, or user memory.
 
-## Core Task Record
+## Domain Task Record
 
 The initial Task record should remain small.
 
@@ -439,7 +439,7 @@ The Task domain must enforce at least these invariants:
 10. Task -> Project promotion creates a new Project identity and preserves the original Task.
 11. Promotion, completion, reopening, cancellation, and meaningful ownership/context changes are auditable.
 12. History is preserved by default; destructive deletion is exceptional.
-13. Core object semantics are not tenant-configurable.
+13. Domain object semantics are not tenant-configurable.
 14. Project Activity Tasks remain distinct from normal execution Tasks and do not contribute to normal completion percentages.
 
 ## Explicit MVP Exclusions

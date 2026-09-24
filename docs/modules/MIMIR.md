@@ -57,7 +57,7 @@ A task should be creatable with little more than a title.
 
 Configuration should increase capability, not become a prerequisite for basic work.
 
-## Core Concepts
+## Domain Concepts
 
 ### WorkItem
 

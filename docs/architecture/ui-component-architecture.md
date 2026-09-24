@@ -486,7 +486,7 @@ Example:
 
 ```text
 Assignee       Erik Thorvaldsson
-Project        Yggdrasil Core
+Project        Yggdrasil Domain
 Priority       High
 Due Date       Nov 20, 2026
 Created        Nov 10, 2026
@@ -738,7 +738,7 @@ My Tasks
 ```text
 Project Health
 
-Yggdrasil Core       On Track
+Yggdrasil Domain       On Track
 Infrastructure       At Risk
 Documentation        On Track
 ```

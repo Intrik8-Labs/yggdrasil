@@ -6,16 +6,16 @@ These rules keep the .NET modular monolith understandable as the product grows. 
 
 Each business area owns its models, policies, workflows, and public interfaces. Initial module namespaces include `Yggdrasil.Tyr`, `Yggdrasil.Valhalla`, `Yggdrasil.Mimir`, and `Yggdrasil.Urd`.
 
-A module must not reference another module’s Core, UseCases, or Infrastructure assembly. Cross-module calls use deliberately public Contracts interfaces, DTOs, and events.
+A module must not reference another module’s Domain, Application, or Infrastructure assembly. Cross-module calls use deliberately public Contracts interfaces, DTOs, and events.
 
 ## 2. Project Dependencies
 
-- **Core** owns domain entities, value objects, invariants, and domain events. It has no ASP.NET Core, EF Core, or vendor SDK dependency.
-- **UseCases** owns command/query orchestration and application interfaces. It depends on Core and required public Contracts.
-- **Infrastructure** implements persistence and external adapters. It depends inward on Core and UseCases.
+- **Domain** owns domain entities, value objects, invariants, and domain events. It has no ASP.NET Core, EF Core, or vendor SDK dependency.
+- **Application** owns command/query orchestration and application interfaces. It depends on Domain. Add other references only when a concrete use case requires them.
+- **Infrastructure** implements persistence and external adapters. It depends inward on Domain and Application.
 - **Contracts** exposes stable DTOs, interfaces, and integration events without exposing domain or persistence objects.
 - **Hosts** compose services through dependency injection. HTTP endpoints and controllers own transport concerns and call use cases.
-- **SharedKernel** contains only small, framework-free concepts genuinely shared by multiple modules.
+- **SharedKernel** contains only small, framework-free concepts genuinely shared by multiple modules. Domain references it only when it uses a real shared concept; the empty Týr Domain scaffold has no such reference.
 
 Background services invoke use cases through the same boundaries. Moving work outside the request cycle does not permit bypassing authorization or tenant context.
 
@@ -27,7 +27,7 @@ Do not publish every model callback as an event. Events represent meaningful bus
 
 ## 4. Persistence
 
-Use EF Core/Npgsql inside Infrastructure for PostgreSQL persistence. Keep EF Core types out of Core and public Contracts. Application-owned persistence interfaces should express use-case needs rather than merely rename generic CRUD operations.
+Use EF Core/Npgsql inside Infrastructure for PostgreSQL persistence. Keep EF Core types out of Domain and public Contracts. Application-owned persistence interfaces should express use-case needs rather than merely rename generic CRUD operations.
 
 All tenant-owned records and queries must be scoped to the active tenant. Security must not depend on a caller remembering an optional scope. Important uniqueness and referential-integrity rules should also be enforced by PostgreSQL constraints.
 
@@ -50,7 +50,7 @@ Business code must not depend directly on an external vendor SDK when a small ap
 Automated checks should eventually verify at least:
 
 - tenant-owned access cannot escape the active tenant
-- assembly references follow the Core, UseCases, Infrastructure, and Contracts dependency rules
+- assembly references follow the Domain, Application, Infrastructure, and Contracts dependency rules
 - controllers remain orchestration-focused
 - public contracts do not expose internal model representations
 - database constraints reinforce critical invariants

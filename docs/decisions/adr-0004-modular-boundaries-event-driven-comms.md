@@ -19,7 +19,7 @@ Yggdrasil is a .NET modular monolith with a broad domain catalog and a focused f
 
 ## Decision
 
-Modules communicate through public Contracts interfaces and integration events. They must not reference another module's Core, UseCases, or Infrastructure implementation assemblies.
+Modules communicate through public Contracts interfaces and integration events. They must not reference another module's Domain, Application, or Infrastructure implementation assemblies.
 
 Use explicit synchronous interfaces when a caller requires an immediate result. Publish events for completed business facts when consumers can react independently. Event contracts carry stable identifiers and data, not tracked persistence entities.
 

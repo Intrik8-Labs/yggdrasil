@@ -8,7 +8,7 @@ Týr owns human identity, authentication, organization membership, and the autho
 
 ## .NET Design
 
-Týr is designed as a .NET module under `Yggdrasil.Tyr`, with Core, UseCases, Infrastructure, and Contracts assemblies. ASP.NET Core authentication and authorization integrate at the host and infrastructure boundaries; domain concepts remain independent of framework session details.
+Týr is designed as a .NET module under `Yggdrasil.Tyr`, with Domain, Application, Infrastructure, and Contracts assemblies. ASP.NET Core authentication and authorization integrate at the host and infrastructure boundaries; domain concepts remain independent of framework session details.
 
 Initial concepts are:
 

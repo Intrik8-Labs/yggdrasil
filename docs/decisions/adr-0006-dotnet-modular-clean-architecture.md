@@ -20,14 +20,14 @@ Yggdrasil will use:
 - ASP.NET Core for application hosts and HTTP APIs
 - a modular monolith as the initial deployment architecture
 - Clean Architecture boundaries within each business module
-- an Ardalis-inspired module shape of Core, UseCases, Infrastructure, and Contracts
+- an Ardalis-inspired module shape of Domain, Application, Infrastructure, and Contracts
 - a small framework-free `Yggdrasil.SharedKernel`
 - PostgreSQL with EF Core/Npgsql for primary relational persistence
 - explicit commands and queries using small project-owned abstractions initially
 - public contracts and events as the primary cross-module boundary
 - Protocol Buffers for long-lived language-neutral agent/plugin/extension contracts
 
-Module implementation assemblies are private. A module must not directly reference another module's Core, UseCases, or Infrastructure implementation.
+Module implementation assemblies are private. A module must not directly reference another module's Domain, Application, or Infrastructure implementation.
 
 ## Consequences
 

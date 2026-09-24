@@ -53,7 +53,7 @@ Projects use immutable UUIDv7 system identity plus a tenant-scoped sequence and 
 
 Human keys are immutable after creation and are not canonical persistence/API identity.
 
-## Core Project Record
+## Domain Project Record
 
 | Field | Type | Required | Default | Mutable | Notes |
 | --- | --- | ---: | --- | ---: | --- |
@@ -242,7 +242,7 @@ Audit at least Project creation, title/status/owner/date changes, parent Project
 10. Project Activity Tasks do not affect normal work completion percentage.
 11. Project Activity Tasks cannot be moved to another Project.
 12. Project Activity Tasks remain semantically distinct from normal Tasks.
-13. Core Project semantics are not tenant-configurable.
+13. Domain Project semantics are not tenant-configurable.
 14. Future custom Project Activity categories are organization-level configuration, not arbitrary per-Project types.
 
 ## MVP Exclusions

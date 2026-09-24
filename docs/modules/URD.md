@@ -75,7 +75,7 @@ Audit records should therefore be:
 
 Do not treat raw application logs as the audit system.
 
-## Core Concepts
+## Domain Concepts
 
 ### AuditRecord
 

@@ -50,7 +50,7 @@ Their time is aggregated from underlying Tasks.
 
 Tickets that require tracked work should create/link Tasks rather than receiving direct Time Entries.
 
-## Core Time Entry Record
+## Domain Time Entry Record
 
 | Field | Type | Required | Default | Mutable | Notes |
 | --- | --- | ---: | --- | ---: | --- |

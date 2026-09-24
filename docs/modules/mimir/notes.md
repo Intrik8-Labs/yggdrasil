@@ -71,7 +71,7 @@ This rule keeps:
 
 predictable and understandable.
 
-## 4. Core Note Record
+## 4. Domain Note Record
 
 | Field | Type | Required | Default | Mutable | Notes |
 | --- | --- | ---: | --- | ---: | --- |

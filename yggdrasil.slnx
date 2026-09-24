@@ -2,4 +2,13 @@
   <Folder Name="/hosts/">
     <Project Path="src/hosts/Yggdrasil.Api/Yggdrasil.Api.csproj" />
   </Folder>
+  <Folder Name="/modules/tyr/">
+    <Project Path="src/modules/tyr/Yggdrasil.Tyr.Contracts/Yggdrasil.Tyr.Contracts.csproj" />
+    <Project Path="src/modules/tyr/Yggdrasil.Tyr.Domain/Yggdrasil.Tyr.Domain.csproj" />
+    <Project Path="src/modules/tyr/Yggdrasil.Tyr.Infrastructure/Yggdrasil.Tyr.Infrastructure.csproj" />
+    <Project Path="src/modules/tyr/Yggdrasil.Tyr.Application/Yggdrasil.Tyr.Application.csproj" />
+  </Folder>
+  <Folder Name="/shared/">
+    <Project Path="src/shared/Yggdrasil.SharedKernel/Yggdrasil.SharedKernel.csproj" />
+  </Folder>
 </Solution>

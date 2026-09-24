@@ -655,7 +655,7 @@ Consumers must be able to process duplicate events idempotently.
 
 Mímir emits auditable context; Urd owns durable audit persistence.
 
-Do not couple Mímir Core to Urd implementation.
+Do not couple Mímir Domain to Urd implementation.
 
 ---
 

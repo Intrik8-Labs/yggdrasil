@@ -13,7 +13,7 @@ The platform must support self-hosted and air-gapped deployments, strong tenant 
 
 Yggdrasil is a C# and .NET 10 modular monolith. ASP.NET Core hosts HTTP APIs and composes application services. Background processing uses .NET hosted services where appropriate. PostgreSQL is the planned system of record, accessed through EF Core/Npgsql infrastructure adapters.
 
-Business areas use explicit C# namespaces and assemblies such as `Yggdrasil.Tyr`, `Yggdrasil.Valhalla`, `Yggdrasil.Mimir`, and `Yggdrasil.Urd`. Each module separates Core, UseCases, Infrastructure, and Contracts. Modules communicate through public contracts and events; implementation assemblies remain private. Hosts compose modules within one deployment.
+Business areas use explicit C# namespaces and assemblies such as `Yggdrasil.Tyr`, `Yggdrasil.Valhalla`, `Yggdrasil.Mimir`, and `Yggdrasil.Urd`. Each module separates Domain, Application, Infrastructure, and Contracts. Modules communicate through public contracts and events; implementation assemblies remain private. Hosts compose modules within one deployment.
 
 Use focused .NET components for application behavior:
 
@@ -47,8 +47,8 @@ yggdrasil/
 │   │   └── Yggdrasil.Api/
 │   ├── modules/
 │   │   └── <Module>/
-│   │       ├── Yggdrasil.<Module>.Core/
-│   │       ├── Yggdrasil.<Module>.UseCases/
+│   │       ├── Yggdrasil.<Module>.Domain/
+│   │       ├── Yggdrasil.<Module>.Application/
 │   │       ├── Yggdrasil.<Module>.Infrastructure/
 │   │       └── Yggdrasil.<Module>.Contracts/
 │   └── shared/

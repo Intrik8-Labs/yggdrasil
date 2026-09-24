@@ -7,7 +7,7 @@ Yggdrasil is developed incrementally with lightweight weekly iterations. The roa
 Establish the long-lived project foundation before feature expansion.
 
 - build on .NET 10 and ASP.NET Core, with EF Core/Npgsql for PostgreSQL persistence
-- establish Core, UseCases, Infrastructure, and Contracts boundaries within the modular monolith
+- establish Domain, Application, Infrastructure, and Contracts boundaries within the modular monolith
 - define pragmatic namespace and dependency rules
 - establish tenant context and authorization boundaries
 - establish the test, lint, and security-check baseline
